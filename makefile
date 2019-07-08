@@ -6,7 +6,7 @@
 #    By: jsauron <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/01 18:30:18 by jsauron           #+#    #+#              #
-#    Updated: 2019/07/01 19:18:16 by jsauron          ###   ########.fr        #
+#    Updated: 2019/07/08 14:50:20 by jsauron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = ft_ls
 
 SRCS_DIR = srcs/
 
-SRC = srcs/ft_ls.c
-
+SRC = srcs/ft_ls.c \
+	  ft_strmode.c
 OBJS = $(SRC:.c=.o)
 
 INCLUDES = includes/
