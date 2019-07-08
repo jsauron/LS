@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/08 14:51:29 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/08 15:41:45 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include <pwd.h>
 #include <uuid/uuid.h>
 #include <string.h>
+#include <grp.h>
 
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);

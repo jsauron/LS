@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/08 14:51:40 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/08 15:42:23 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		get_info(char *path, struct dirent *dirent, struct stat statbuf)
 		printf("Type: Fichier\n");
 		printf("Mode: %s\n", ft_strmode(statbuf.st_mode));
 		printf("Nombre de liens: %hu\n", statbuf.st_nlink);
-	//	printf("Proprietaire: %d\n", getuid(statbuf.st_uid));
-	//	printf("Groupe: %u\n", getgrgid(statbuf.st_gid));
+		printf("Proprietaire: %s\n", (getpwuid(statbuf.st_uid))->pw_name);
+		printf("Groupe: %s\n", (getgrgid(statbuf.st_gid))->gr_name);
 		printf("Taille: %lld octets\n", statbuf.st_size);
 		printf("Date de derniere modification:: %s \n", ctime(&statbuf.st_mtime));
 	}
