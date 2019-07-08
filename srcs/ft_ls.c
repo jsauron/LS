@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/08 15:46:26 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/08 16:27:47 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		list_dir(char *path, struct dirent *dirent, DIR *dir, struct stat statbuf)
 	return (1);
 }
 
-//int		list_dir()
 
 void	parse(char *path)
 {
@@ -55,28 +54,30 @@ void	parse(char *path)
 	struct stat		statbuf;
 	//char			current_path[PATH_MAX];
 
-	//ouvrir le current dir
-	if ((dir = opendir(".")) == NULL)
-			stop_exec(strerror(errno));
 	//stocker le path du current file dans statbuf
 	//if ((getcwd(current_path, PATH_MAX) == NULL))
 	//		stop_exec(strerror(errno));
-	//printf("curr->path = %s\n", current_path);
 	if (lstat( path, &statbuf) == -1)
 			stop_exec(strerror(errno));
 	if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
+	{
+		if ((dir = opendir(path)) == NULL)
+			stop_exec(strerror(errno));
 		list_dir(path, dirent, dir, statbuf);
+		closedir(dir);
+	}
 	if (S_ISREG(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
 		get_info(path, dirent, statbuf);;
-	closedir(dir);
 }
 
 int		main(int ac, char **av)
 {
+	char	arg[5]  = {'l', 'R', 'a', 'r', 't'};
 	//parsing
 	if (ac == 1)
 		parse(".");
 	else if (ac > 1)
 		parse(av[1]);
+
 	return (0);
 }
