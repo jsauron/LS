@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/01 19:06:40 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:08:49 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@
 #include <time.h>
 #include <sys/xattr.h>
 #include <dirent.h>
-
+#include <errno.h>
 
 #endif

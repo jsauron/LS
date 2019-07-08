@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/02 11:26:03 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/08 11:54:48 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ void	list_dir(char *path)
 	DIR		*dir;
 	struct dirent *dirent;
 
-	dir = opendir(path);
+	if ((dir = opendir(path)) == NULL)
+			stop_exec(strerror(errno));
 	while ((dirent = readdir(dir)) != NULL)
-		printf("%s\n", dirent->d_name);
+	{
+		if ( (ft_strcmp(dirent->d_name, ".") != 0) && (ft_strcmp(dirent->d_name, "..") != 0)) //ignorer les fichier cacher
+			printf("%s\n", dirent->d_name);
+	}
 	closedir(dir);
 }
 
@@ -34,5 +38,7 @@ int		main(int ac, char **av)
 	//parsing
 	if (ac == 1)
 		list_dir(".");
+	else if (ac > 1)
+		list_dir(av[1]);
 	return (0);
 }
