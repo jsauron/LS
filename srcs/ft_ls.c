@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/08 16:27:47 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/08 16:36:09 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int		main(int ac, char **av)
 {
 	char	arg[5]  = {'l', 'R', 'a', 'r', 't'};
 	//parsing
+	if (ft_strcmp(av[1], "-R") == 0)
+		printf("-R\n");
 	if (ac == 1)
 		parse(".");
 	else if (ac > 1)
