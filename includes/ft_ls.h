@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/08 18:41:47 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/09 17:47:01 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 
 typedef struct		s_info
 {
-	char			*path;
 	char			*mode;
 	int				nb_lien;
 	char			*user;
@@ -59,6 +58,8 @@ typedef struct		s_info
 typedef struct		t_dir
 {
 	char			*name;
+	char			*path;
+	char			*type;
 	t_info			info;
 	struct t_dir			*next;
 

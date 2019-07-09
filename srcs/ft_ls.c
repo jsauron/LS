@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/08 18:17:41 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/09 18:10:54 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ void	stop_exec(char *msg)
 
 int		get_info_in_list(t_info *f, char *path, struct dirent *dirent, struct stat statbuf)
 {
-		printf("%s\n", ft_strmode(statbuf.st_mode));
+	(void)path;
+		printf("file = %s, %s\n", dirent->d_name, ft_strmode(statbuf.st_mode));
 	if (S_ISREG(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
 	{
-		printf("Type: Fichier\n");
+//		printf("Type: Fichier\n");
 		f->mode = ft_strmode(statbuf.st_mode);
 		f->nb_lien =  statbuf.st_nlink;
 		f->user = (getpwuid(statbuf.st_uid))->pw_name;
@@ -36,6 +37,8 @@ int		get_info_in_list(t_info *f, char *path, struct dirent *dirent, struct stat 
 
 int		get_info(char *path, struct dirent *dirent, struct stat statbuf)
 {
+	(void)path;
+	(void)dirent;
 	if (S_ISREG(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
 	{
 		printf("Type: Fichier\n");
@@ -51,6 +54,8 @@ int		get_info(char *path, struct dirent *dirent, struct stat statbuf)
 
 int		list_dir(char *path, struct dirent *dirent, DIR *dir, struct stat statbuf)
 {
+	(void)path;
+	(void)dirent;
 	if (S_ISDIR(statbuf.st_mode) /*&& ft_strcmp(path, dirent->d_name) == 0*/)
 	{
 		while ((dirent = readdir(dir)) != NULL)
@@ -73,6 +78,7 @@ void	parse(char *path)
 	//stocker le path du current file dans statbuf
 	//if ((getcwd(current_path, PATH_MAX) == NULL))
 	//		stop_exec(strerror(errno));
+	dirent = NULL;
 	if (lstat(path, &statbuf) == -1)
 		stop_exec(strerror(errno));
 	if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
@@ -91,7 +97,8 @@ int		fonction_r(char *path)
 	DIR				*dir;
 	struct dirent	*dirent;
 	struct stat		statbuf;
-	
+
+	dirent = NULL;
 	if (lstat(path, &statbuf) == -1)
 		stop_exec(strerror(errno));
 	if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
@@ -108,7 +115,7 @@ int		fonction_r(char *path)
 
 int		main(int ac, char **av)
 {
-	char	arg[5]  = {'l', 'R', 'a', 'r', 't'};
+	//char	arg[5]  = {'l', 'R', 'a', 'r', 't'};
 	//parsing
 	if (ac == 1)
 		parse(".");

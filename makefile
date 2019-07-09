@@ -6,7 +6,7 @@
 #    By: jsauron <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/01 18:30:18 by jsauron           #+#    #+#              #
-#    Updated: 2019/07/08 17:05:53 by jsauron          ###   ########.fr        #
+#    Updated: 2019/07/09 18:04:46 by jsauron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,14 +33,14 @@ $(NAME):$(OBJS)
 lib:
 	@make -j -C libft/ libft.a
 
-%.o: %.c $(INCLUDE)ft_ls.h
+%.o: %.c $(INCLUDES)ft_ls.h
 	@gcc -Wall -Wextra -Werror -o $@ -c $<
 
 clean:
 	@rm -f $(OBJS) && make -C libft/ clean
 
 fclean:
-	@rm -f $(OBJS) && make -C libft/ fclean
+	@rm -f $(NAME) && make -C libft/ fclean
 
 re: fclean
 	@$(MAKE)

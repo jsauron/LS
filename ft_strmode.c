@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:58:35 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/08 15:30:07 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/09 17:40:36 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ char	*ft_strmode(mode_t mode)
 	}
 	*p++ = ' ';/* will be a '+' if ACL's implemeented */
 	*p = '\0';
+	printf("h = %s\n", head);
 	return (head);
 }
