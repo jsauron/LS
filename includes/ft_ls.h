@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/09 17:47:01 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/22 18:27:29 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 # define C_GRAY         "\033[37m"
 
 
-typedef struct		s_info
+typedef struct		t_info
 {
 	char			*mode;
 	int				nb_lien;
@@ -54,12 +54,22 @@ typedef struct		s_info
 	char			*time;
 }					t_info;
 
-
-typedef struct		t_dir
+typedef struct		t_file
 {
 	char			*name;
 	char			*path;
+	t_info			info;
+	struct t_file			*next;
+}					t_file;
+
+typedef struct		t_dir
+{
+	int				index;
+	int				hide;
+	char			*name;
+	char			*path;
 	char			*type;
+	t_file			**file;
 	t_info			info;
 	struct t_dir			*next;
 
@@ -67,6 +77,9 @@ typedef struct		t_dir
 
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);
-int		create_list(char *path, struct dirent *dirent, DIR *dir,  struct stat statbuf);
-int		get_info_in_list(t_info *f, char *path, struct dirent *dirent, struct stat statbuf);
+int		add_dir(t_dir	*curr, struct stat statb, char *name, char *path);
+int		add_file();
+int		create_list(char *path, struct dirent *dirent, DIR *dir, t_dir *curr);
+int		get_info_in_list(t_info *f, struct stat statbuf);
+int		fonction_r(char *path, t_dir *curr);
 #endif

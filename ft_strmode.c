@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:58:35 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/09 17:40:36 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/22 12:48:36 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,33 @@ char	*ft_strmode(mode_t mode)
 	char	*p;
 	int		i;
 	char	*head;
+	mode_t mode_t;
 
 	i = 0;
-	p = malloc(sizeof(char) * 2048);
-	while (i < 25)
+	p = malloc(sizeof(char) * 9);
+	while (i < 9)
 		p[i++] = '0';
 	head = p;
 	/*type*/
-	if (mode & S_IFMT) //masque du type de fichier
-	{
-		 if (S_IFDIR) /* directory */
-			*(p++) = 'd';
-		else if (S_IFCHR) /* character special */
-			*(p++) = 'c';
-		else if (S_IFBLK) /* block special */
-			*(p++) = 'b';
-		else if (S_IFREG) /* regular */
-			*(p++) = '-';
-		else if (S_IFLNK)  /* symbolic link */
-			*(p++) = 'l';
-		else if (S_IFSOCK) /* socket */
-			*(p++) = 's';
-		else if (S_IFIFO) /* fifo */
-			*(p++) = 'p';
-		else if  (S_IFWHT)/* whiteout */
-			*(p++) = 'w';
-		else
-			*(p++) = '?';
-	}
+	mode_t = mode & S_IFMT; //masque du type de fichier
+	if (S_ISDIR(mode_t)) /* directory */
+		*(p++) = 'd';
+	else if (S_ISCHR(mode_t)) /* character special */
+		*(p++) = 'c';
+	else if (S_ISBLK(mode_t)) /* block special */
+		*(p++) = 'b';
+	else if (S_ISREG(mode_t)) /* regular */
+		*(p++) = '-';
+	else if (S_ISLNK(mode_t))  /* symbolic link */
+		*(p++) = 'l';
+	else if (S_ISSOCK(mode_t)) /* socket */
+		*(p++) = 's';
+	else if (S_ISFIFO(mode_t)) /* fifo */
+		*(p++) = 'p';
+	else if  (S_ISWHT(mode_t))/* whiteout */
+		*(p++) = 'w';
+	else
+		*(p++) = '?';
 	/* usr			 */
 	if (mode & S_IRUSR)
 		*p++ = 'r';
@@ -95,19 +94,21 @@ char	*ft_strmode(mode_t mode)
 		*p++ = 'w';
 	else
 		*p++ = '-';
-	if (mode & (S_IXOTH | S_ISVTX))
-	{
-		if (S_IXOTH)
+	//if (mode & (S_IXOTH | S_ISVTX))
+	//{
+		if (mode & S_IXOTH)
 			*p++ = 'x';
-		else if (S_ISVTX)
+		else
+			*p++ = '-';
+	/*	if (mode & S_ISVTX)
 			*p++ = 'T';
 		else if (S_IXOTH | S_ISVTX)
 			*p++ = 't';
 		else
 			*p++ = '-';
-	}
+	//}*/
 	*p++ = ' ';/* will be a '+' if ACL's implemeented */
 	*p = '\0';
-	printf("h = %s\n", head);
+//	printf("h = %s\n", head);
 	return (head);
 }

@@ -6,7 +6,7 @@
 #    By: jsauron <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/01 18:30:18 by jsauron           #+#    #+#              #
-#    Updated: 2019/07/09 18:04:46 by jsauron          ###   ########.fr        #
+#    Updated: 2019/07/22 14:37:33 by jsauron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ DONE = "\033[35m LS READY \033[0m"
 all: lib $(NAME)
 
 $(NAME):$(OBJS)
-	@gcc -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJS) -I $(INCLUDES)
+	@gcc -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJS) -I $(INCLUDES) -g -fsanitize=address
 	@echo $(DONE)
 
 lib:

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/09 18:10:54 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/22 18:16:22 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ void	stop_exec(char *msg)
 	exit(0);
 }
 
-int		get_info_in_list(t_info *f, char *path, struct dirent *dirent, struct stat statbuf)
+int		get_info_in_list(t_info *f, struct stat statbuf)
 {
-	(void)path;
-		printf("file = %s, %s\n", dirent->d_name, ft_strmode(statbuf.st_mode));
+//		printf("file = %s, %s\n", dirent->d_name, ft_strmode(statbuf.st_mode));
 	if (S_ISREG(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
 	{
 //		printf("Type: Fichier\n");
@@ -92,12 +91,13 @@ void	parse(char *path)
 		get_info(path, dirent, statbuf);;
 }
 
-int		fonction_r(char *path)
+int		fonction_r(char *path, t_dir *curr)
 {
 	DIR				*dir;
 	struct dirent	*dirent;
 	struct stat		statbuf;
 
+	printf("\n");
 	dirent = NULL;
 	if (lstat(path, &statbuf) == -1)
 		stop_exec(strerror(errno));
@@ -105,29 +105,42 @@ int		fonction_r(char *path)
 	{
 		if ((dir = opendir(path)) == NULL)
 			stop_exec(strerror(errno));
-		create_list(path, dirent, dir, statbuf);
+		write(1, C_CYAN, 5);
+		write(1, C_BOLD, 5);
+		printf("%s\n", path);
+		write(1, C_NONE, 5);
+		create_list(path, dirent, dir, curr);
 		//list_dir(path, dirent, dir, statbuf);
 		closedir(dir);
 	}
+	else if (S_ISREG(statbuf.st_mode))
+		printf("%s\n", path);
 	return (1);
 }
 
 
 int		main(int ac, char **av)
 {
+	t_dir	*curr;
+	t_file	*file;
+
+	curr = NULL;
+	file = NULL;
+	curr = malloc(sizeof(t_dir));
+	int i;
+
+	 i = 0 ;
 	//char	arg[5]  = {'l', 'R', 'a', 'r', 't'};
-	//parsing
 	if (ac == 1)
 		parse(".");
 	else if (ft_strcmp(av[1], "-R") == 0)
 	{
 		if (ac < 3) 
-			fonction_r(".");
+			fonction_r(".", curr);
 		else if (ac == 3)
-			fonction_r(av[2]);
+			fonction_r(av[2], curr);
 	}
 	else if (ac > 1)
 		parse(av[1]);
-
 	return (0);
 }
