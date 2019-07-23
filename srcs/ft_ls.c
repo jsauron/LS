@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/23 13:31:14 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/23 13:32:49 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int		main(int ac, char **av)
 	}
 	else if (ac > 1)
 		parse(av[1]);
-	print_list(head);
+
+//	print_list(head);
 	return (0);
 }
