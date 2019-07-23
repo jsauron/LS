@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/22 18:16:22 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/23 13:31:14 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ int		fonction_r(char *path, t_dir *curr)
 		//list_dir(path, dirent, dir, statbuf);
 		closedir(dir);
 	}
-	else if (S_ISREG(statbuf.st_mode))
-		printf("%s\n", path);
+	//else if (S_ISREG(statbuf.st_mode))
+	//	printf("%s\n", path);
 	return (1);
 }
 
@@ -123,10 +123,13 @@ int		main(int ac, char **av)
 {
 	t_dir	*curr;
 	t_file	*file;
+	t_dir	*head;
 
 	curr = NULL;
 	file = NULL;
+	head = NULL;
 	curr = malloc(sizeof(t_dir));
+	head = curr;
 	int i;
 
 	 i = 0 ;
@@ -142,5 +145,6 @@ int		main(int ac, char **av)
 	}
 	else if (ac > 1)
 		parse(av[1]);
+	print_list(head);
 	return (0);
 }

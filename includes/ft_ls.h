@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/22 18:27:29 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/23 13:23:42 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct		t_file
 	char			*path;
 	t_info			info;
 	struct t_file			*next;
+	struct t_file			*before;
 }					t_file;
 
 typedef struct		t_dir
@@ -69,15 +70,17 @@ typedef struct		t_dir
 	char			*name;
 	char			*path;
 	char			*type;
-	t_file			**file;
+	t_file			*file;
 	t_info			info;
 	struct t_dir			*next;
+	struct t_dir			*before;
 
 }					t_dir;
 
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);
-int		add_dir(t_dir	*curr, struct stat statb, char *name, char *path);
+int		print_list(t_dir *d);
+int		add_dir(t_dir	*curr, struct stat statb, struct dirent *dirent, char *path);
 int		add_file();
 int		create_list(char *path, struct dirent *dirent, DIR *dir, t_dir *curr);
 int		get_info_in_list(t_info *f, struct stat statbuf);
