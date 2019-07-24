@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/24 17:21:05 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/24 18:18:57 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int		listing_dir_all(char *path, t_element *curr)
 		dir = NULL;
 		dirent = NULL;
 
+		printf(" %s\n", path);
 		if (lstat(path, &statbuf) == -1)
 			stop_exec(strerror(errno));
 		if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
@@ -127,7 +128,9 @@ int		listing_dir_all(char *path, t_element *curr)
 				stop_exec(strerror(errno));
 
 		read_all(curr, path, dirent, dir, statbuf);
-		check_dir(curr->head);
+		closedir(dir);
+
+		check_dir(curr->head, curr);
 		return (1);
 }
 

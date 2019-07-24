@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 17:03:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/24 17:22:15 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/24 18:19:52 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,54 +74,32 @@ int			read_all(t_element *curr, char *path, struct dirent *dirent, DIR *dir, str
 			lstat(new_path ,&statbuf);
 
 			curr->state = (S_ISDIR(statbuf.st_mode) ? 1 : 0);
-			curr->path = path;
+			curr->path = new_path;
 			//printf("%s\n",curr->path);
 			curr->name = dirent->d_name;
-			printf("%s\n",curr->name);
+			printf("%s\t",curr->name);
 			curr->stair = i;
 		}
 	}
-	curr = curr->head;
+//	curr = curr->head;
 	return (1);
 }
 
-int			check_dir(t_element *head)
+int			check_dir(t_element *head, t_element *curr)
 {
+
+	(void)curr;
 	head = head->next;
 	while (head != NULL)
 	{
-		printf("%s\t", head->name);
+		if (head->state == 1)
+		{
+			printf("\n");
+			head->state = 0;
+			listing_dir_all(head->path, curr);
+		}
 		head = head->next;
 	}
 	return (1);
 }
 
-
-/*
-   t_dir		*create_list(char *path, struct dirent *dirent, DIR *dir, t_dir *curr)
-   {
-   struct stat		stat_b;
-   char	*new_path;
-   t_dir   *new;
-   new_path = NULL;
-   while ((dirent = readdir(dir)) != NULL)
-   {
-   if ((ft_strcmp(dirent->d_name, ".") != 0) && (ft_strcmp(dirent->d_name, "..") != 0))
-   {
-   new_path = ft_addstr(path, ft_addstr("/", dirent->d_name));
-   lstat(new_path ,&stat_b);
-   if (S_ISDIR(stat_b.st_mode))
-   add_dir(curr, stat_b,  dirent, new_path, dir);
-   else if (S_ISREG(stat_b.st_mode))
-   printf("%s\t", dirent->d_name );
-//add_file(curr, stat_b, dirent->d_name, new_path);
-if ((!(new = malloc(sizeof(t_dir)))) || (!(new->file = malloc(sizeof(t_file)))))
-stop_exec("malloc curr next in fonction_r failed");
-curr->next  = new;
-new->next = NULL;
-curr = curr->next;
-}
-}
-curr->next = NULL;
-return (curr);
-}*/

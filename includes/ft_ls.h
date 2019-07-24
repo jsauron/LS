@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/24 17:16:02 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/24 17:29:12 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ int		fonction_r( t_element *curr, struct stat statb, struct dirent *dirent, DIR 
 void  stop_exec(char *msg);
 int read_all(t_element *curr, char *path , struct dirent *dirent, DIR *dir, struct stat statbuf);
 t_element *init_list(char *path);
-int		check_dir(t_element *head);
+int		check_dir(t_element *head, t_element *curr);
+int		listing_dir_all(char *path,  t_element *curr);
 #endif
