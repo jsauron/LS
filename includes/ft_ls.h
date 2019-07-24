@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/24 13:21:17 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/24 17:16:02 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,29 @@ typedef struct		t_file
 	struct t_file			*before;
 }					t_file;
 
-typedef struct		t_dir
+typedef struct		t_element
 {
-	int				index;
+	int				state;
+	int				stair;
 	int				hide;
 	char			*name;
 	char			*path;
-	char			*type;
-	t_file			*file;
-	t_info			info;
-	struct t_dir			*head;
-	struct t_dir			*next;
-}					t_dir;
+	t_info			*info;
+	struct t_element			*head;
+	struct t_element			*next;
+}					t_element;
 
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);
-int		print_list(t_dir *d);
-int		add_dir(t_dir	*curr, struct stat statb, struct dirent *dirent, char *path, DIR *dir);
+int		print_list(t_element *d);
+int		add_dir(t_element	*curr, struct stat statb, struct dirent *dirent, char *path, DIR *dir);
 int		add_file();
-t_dir		*create_list(char *path, struct dirent *dirent, DIR *dir, t_dir *curr);
-int		get_info_in_list(t_info *f, struct stat statbuf);
-int		fonction_r( t_dir *curr, struct stat statb, struct dirent *dirent, DIR *dir, char *path);
+t_element	*create_list(char *path, struct dirent *dirent, DIR *dir, t_element *curr);
+int		get_info(t_info *f, struct stat statbuf);
+int		print_info(struct stat statbuf);
+int		fonction_r( t_element *curr, struct stat statb, struct dirent *dirent, DIR *dir, char *path);
 void  stop_exec(char *msg);
+int read_all(t_element *curr, char *path , struct dirent *dirent, DIR *dir, struct stat statbuf);
+t_element *init_list(char *path);
+int		check_dir(t_element *head);
 #endif
