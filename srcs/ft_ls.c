@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/24 18:18:57 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/24 18:21:11 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,17 +134,6 @@ int		listing_dir_all(char *path, t_element *curr)
 		return (1);
 }
 
-//int		listing_dir_all(char *path)
-//{
-//		open_dir(path);
-	//	read_all(path, dirent, dir, statbuf);
-//		trie
-//		print
-//		itere sur chaque elem du doss si dossier go opendir
-//		free
-		//closedir(dir);
-//		return (1);
-//}
 
 int		main(int ac, char **av)
 {
