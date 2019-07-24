@@ -6,7 +6,7 @@
 #    By: jsauron <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/01 18:30:18 by jsauron           #+#    #+#              #
-#    Updated: 2019/07/22 14:37:33 by jsauron          ###   ########.fr        #
+#    Updated: 2019/07/23 15:49:34 by jsauron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ lib:
 clean:
 	@rm -f $(OBJS) && make -C libft/ clean
 
-fclean:
+fclean: clean
 	@rm -f $(NAME) && make -C libft/ fclean
 
 re: fclean
