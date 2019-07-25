@@ -85,8 +85,8 @@ int		get_info(t_info *f, struct stat statbuf);
 int		print_info(struct stat statbuf);
 int		fonction_r( t_element *curr, struct stat statb, struct dirent *dirent, DIR *dir, char *path);
 void  stop_exec(char *msg);
-int read_all(t_element *curr, char *path , struct dirent *dirent, DIR *dir, struct stat statbuf);
+t_element *read_all(t_element *curr, char *path , struct dirent *dirent, DIR *dir, struct stat statbuf);
 t_element *init_list(char *path);
 int		check_dir(t_element *head, t_element *curr);
-int		listing_dir_all(char *path,  t_element *curr);
+t_element		*listing_dir_all(char *path,  t_element *curr);
 #endif

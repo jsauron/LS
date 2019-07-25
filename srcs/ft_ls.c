@@ -78,40 +78,20 @@ void	parse(char *path)
 		closedir(dir);
 	}
 	if (S_ISREG(statbuf.st_mode) && ft_strcmp(path, dirent->d_name) == 0)
-		print_info(statbuf);;
+		print_info(statbuf);
 }
-/*
-int   fonction_r(t_dir *curr, struct stat statbuf, struct dirent *dirent, DIR *dir, char *path)
-{	
 
-	t_dir   *new;
+void  print_list_1(t_element *d)
+{
+  printf("\n");
+  while (d != NULL)
+  {
+    printf("---%s\n", d->path);
+    d = d->next;
+  }
+}
 
-
-	if ((!(new = malloc(sizeof(t_dir)))) || (!(new->file = malloc(sizeof(t_file)))))
-		stop_exec("malloc curr next in fonction_r failed");
-	curr->next  = new;
-	new->next = NULL;
-	curr = curr->next;
-	if (lstat(path, &statbuf) == -1)
-		stop_exec(strerror(errno));
-	if (S_ISDIR(statbuf.st_mode) && ft_strcmp(path, dirent->d_name) == 0)
-	{
-		if ((dir = opendir(path)) == NULL)
-			stop_exec(strerror(errno));
-	}
-	write(1, C_CYAN, 5);
-	write(1, C_BOLD, 5);
-	printf("%s\n", path);
-	write(1, C_NONE, 5);
-	create_list(path, dirent, dir, curr);
-	closedir(dir);
-
-	//else if (S_ISREG(statbuf.st_mode))
-	//	printf("%s\n", path);
-	return (1);
-}*/
-
-int		listing_dir_all(char *path, t_element *curr)
+t_element		*listing_dir_all(char *path, t_element *curr)
 {
 		DIR				*dir;
 		struct dirent	*dirent;
@@ -120,18 +100,21 @@ int		listing_dir_all(char *path, t_element *curr)
 		dir = NULL;
 		dirent = NULL;
 
-		printf(" %s\n", path);
 		if (lstat(path, &statbuf) == -1)
 			stop_exec(strerror(errno));
 		if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
-			if ((dir = opendir(path)) == NULL)
+    {
+      if ((dir = opendir(path)) == NULL)
 				stop_exec(strerror(errno));
 
-		read_all(curr, path, dirent, dir, statbuf);
-		closedir(dir);
+		  curr = read_all(curr, path, dirent, dir, statbuf);
+	  	closedir(dir);
 
 		check_dir(curr->head, curr);
-		return (1);
+    }
+  else
+    printf("%s\n", path);
+		return (curr->head);
 }
 
 
@@ -146,7 +129,7 @@ int		main(int ac, char **av)
 	if (ac < 3)
 			listing_dir_all(".", init_list("."));
 		else if (ac == 3)
-			listing_dir_all(av[2], init_list(av[2]));
+			print_list_1(listing_dir_all(av[2], init_list(av[2])));
 	}
 	else if (ac > 1)
 		parse(av[1]);

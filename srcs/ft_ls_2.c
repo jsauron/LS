@@ -51,7 +51,7 @@ t_element		*init_list(char *path)
 	return (curr);
 }
 
-int			read_all(t_element *curr, char *path, struct dirent *dirent, DIR *dir, struct stat statbuf)
+t_element			*read_all(t_element *curr, char *path, struct dirent *dirent, DIR *dir, struct stat statbuf)
 {
 	t_element	*new;
 	int static i;
@@ -75,30 +75,31 @@ int			read_all(t_element *curr, char *path, struct dirent *dirent, DIR *dir, str
 
 			curr->state = (S_ISDIR(statbuf.st_mode) ? 1 : 0);
 			curr->path = new_path;
-			//printf("%s\n",curr->path);
 			curr->name = dirent->d_name;
 			printf("%s\t",curr->name);
 			curr->stair = i;
 		}
 	}
+    printf("\n");
 //	curr = curr->head;
-	return (1);
+	return (curr);
 }
 
 int			check_dir(t_element *head, t_element *curr)
 {
+  t_element *elem;
 
-	(void)curr;
-	head = head->next;
-	while (head != NULL)
+  elem = head;
+	//head = head->next;
+	while (elem != NULL)
 	{
-		if (head->state == 1)
+		if (elem->state == 1)
 		{
-			printf("\n");
-			head->state = 0;
-			listing_dir_all(head->path, curr);
-		}
-		head = head->next;
+      printf("%s:\n", elem->path);
+			elem->state = 0;
+			listing_dir_all(elem->path, curr);
+    }
+		elem = elem->next;
 	}
 	return (1);
 }
