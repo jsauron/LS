@@ -86,7 +86,7 @@ void  print_list_1(t_element *d)
   printf("\n");
   while (d != NULL)
   {
-    printf("---%s\n", d->path);
+    printf("---%s\n", d->name);
     d = d->next;
   }
 }

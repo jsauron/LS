@@ -75,8 +75,9 @@ t_element			*read_all(t_element *curr, char *path, struct dirent *dirent, DIR *d
 
 			curr->state = (S_ISDIR(statbuf.st_mode) ? 1 : 0);
 			curr->path = new_path;
-			curr->name = dirent->d_name;
+			curr->name = ft_strdup(dirent->d_name);
 			printf("%s\t",curr->name);
+			printf("%s\n",curr->path);
 			curr->stair = i;
 		}
 	}
@@ -96,6 +97,7 @@ int			check_dir(t_element *head, t_element *curr)
 		if (elem->state == 1)
 		{
       printf("%s:\n", elem->path);
+     // printf("%s\n", elem->name);
 			elem->state = 0;
 			listing_dir_all(elem->path, curr);
     }
