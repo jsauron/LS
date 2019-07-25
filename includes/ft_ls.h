@@ -48,6 +48,7 @@ typedef struct		t_info
 {
 	char			*mode;
 	int				nb_lien;
+	int				type;
 	char			*user;
 	char			*gr_user;
 	size_t			size;

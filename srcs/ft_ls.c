@@ -20,17 +20,13 @@ void	stop_exec(char *msg)
 
 int		get_info(t_info *f, struct stat statbuf)
 {
-	//		printf("file = %s, %s\n", dirent->d_name, ft_strmode(statbuf.st_mode));
-	if (S_ISREG(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
-	{
-		//		printf("Type: Fichier\n");
-		//f->mode = ft_strmode(statbuf.st_mode);
+		f->mode = ft_strdup(ft_strmode(statbuf.st_mode));
 		f->nb_lien =  statbuf.st_nlink;
-		f->user = (getpwuid(statbuf.st_uid))->pw_name;
+		f->user = ft_strdup((getpwuid(statbuf.st_uid))->pw_name);
 		f->gr_user = (getgrgid(statbuf.st_gid))->gr_name;
 		f->size = statbuf.st_size;
 		f->time = ctime(&statbuf.st_mtime);
-	}
+		f->type = (S_ISDIR(statbuf.st_mode)) ? 1 : 0;
 	return (1);
 }
 
@@ -84,11 +80,46 @@ void	parse(char *path)
 void  print_list_1(t_element *d)
 {
   printf("\n");
+  d= d->next;
   while (d != NULL)
   {
     printf("---%s\n", d->name);
+    //printf("---%zu\n", d->info->size);
+    //printf("---%s\n", d->info->mode);
     d = d->next;
   }
+}
+
+char  *path_dir(char *path)
+{
+  char  *head;
+
+  head = path;
+  while (*path)
+    path++;
+  while (*path != '/')
+  {
+   *path = '\0';
+   path--;
+  }
+  *path = '\0';
+  return (ft_strdup(head)); 
+}
+
+void  print_list_2(t_element *d)
+{
+  d = d->next;
+  while (d != NULL)
+  {
+    if (d->info->type)
+          printf("\033[36m\033[1m%s\t \033[0m", d->name);
+    else
+      printf("%s\t", d->name);
+    if (d->next)
+      d->stair < d->next->stair ? printf("\n\n%s\n", path_dir(d->next->path)) : 0;
+  d = d->next;
+  }
+  printf("\n");
 }
 
 t_element		*listing_dir_all(char *path, t_element *curr)
@@ -129,7 +160,7 @@ int		main(int ac, char **av)
 	if (ac < 3)
 			listing_dir_all(".", init_list("."));
 		else if (ac == 3)
-			print_list_1(listing_dir_all(av[2], init_list(av[2])));
+			print_list_2(listing_dir_all(av[2], init_list(av[2])));
 	}
 	else if (ac > 1)
 		parse(av[1]);
