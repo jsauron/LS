@@ -35,23 +35,6 @@ int		print_info(struct stat statbuf)
 	return (1);
 }
 
-/*int		list_dir(struct dirent *dirent, DIR *dir, struct stat statbuf, char *path)
-{
-  char *new_path;
-
-  new_path = NULL;
-		while ((dirent = readdir(dir)) != NULL)
-			if ( (ft_strcmp(dirent->d_name, ".") != 0)
-          && (ft_strcmp(dirent->d_name, "..") != 0) && *dirent->d_name != '.')
-      {
-        new_path = ft_addstr(path, ft_addstr("/", dirent->d_name));
-        lstat(new_path, &statbuf);
-        (S_ISDIR(statbuf.st_mode)) ? printf("\033[36m\033[1m%s\t \033[0m", dirent->d_name) : printf("%s\t", dirent->d_name);
-
-      }
-    return (1);
-}
-*/
 t_element		*listing_dir_all(char *path, t_element *curr, int r)
 {
 		DIR				*dir;
@@ -75,22 +58,27 @@ t_element		*listing_dir_all(char *path, t_element *curr, int r)
 		return (curr->head);
 }
 
-
 int		main(int ac, char **av)
 {
-	//char	arg[5]  = {'l', 'R', 'a', 'r', 't'};
-	//int (*flag[2])(char*, struct dirent *dirent, DIR *, struct stat*) = {list_dir, create_list};
-	if (ac == 1)
+  t_flag    *flag;
+
+  (!(flag = malloc(sizeof(t_flag)))) ? stop_exec("malloc t_flag failed") : 0;
+
+  //init_flag(flag);
+  //parse(flag, ac, av);
+  if (ac == 1)
 		print_list_2(listing_dir_all(".", init_list("."), 0));
 	else if (ft_strcmp(av[1], "-R") == 0)
 	{
 	if (ac < 3)
-			print_list_2(listing_dir_all(".", init_list("."), 2));
+			print_list_2(listing_dir_all(".", init_list("."), 1));
 		else if (ac == 3)
 			print_list_2(listing_dir_all(av[2], init_list(av[2]), 1));
 	}
 	else if (ac > 1)
 		print_list_2(listing_dir_all(av[1], init_list(av[2]), 0));
 
+  free(flag);
 	return (0);
 }
+

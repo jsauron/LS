@@ -67,11 +67,20 @@ typedef struct		t_element
 	struct t_element			*next;
 }					t_element;
 
+typedef struct    t_flag
+{
+  char    **file;
+  char    tab[7];
+  int     sort;
+  int     option;
+}               t_flag;
+
+
 //ft_ls.c
 int   get_info(t_info *f, struct stat statbuf);
 int   print_info(struct stat statbuf);
 int   list_dir(struct dirent *dirent, DIR *dir, struct stat stab, char *path);
-void  parse(char *path);
+int  parse(t_flag *flag, int ac, char **av);
 t_element   *listing_dir_all(char *path, t_element *curr, int r);
 int   main(int ac, char **av);
 
