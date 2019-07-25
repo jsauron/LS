@@ -70,7 +70,7 @@ typedef struct		t_element
 //ft_ls.c
 int   get_info(t_info *f, struct stat statbuf);
 int   print_info(struct stat statbuf);
-int   list_dir(struct dirent *dirent, DIR *dir, struct stat statbuf);
+int   list_dir(struct dirent *dirent, DIR *dir, struct stat stab, char *path);
 void  parse(char *path);
 t_element   *listing_dir_all(char *path, t_element *curr);
 int   main(int ac, char **av);

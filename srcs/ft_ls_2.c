@@ -36,8 +36,7 @@ t_element			*read_all(t_element *curr, char *path, struct dirent *dirent, DIR *d
 	i++;
 	while ((dirent = readdir(dir)) != NULL)
 	{
-
-		if ((ft_strcmp(dirent->d_name, ".") != 0)&& (ft_strcmp(dirent->d_name, "..") != 0))
+		if ((ft_strcmp(dirent->d_name, ".") != 0) && (ft_strcmp(dirent->d_name, "..") != 0) && *dirent->d_name != '.')
 		{
 			(new = malloc(sizeof(t_element))) == NULL ? stop_exec("malloc new failed") : 0;
 			(new->info = malloc(sizeof(t_info))) == NULL ? stop_exec("malloc info failed") : 0;
@@ -50,6 +49,7 @@ t_element			*read_all(t_element *curr, char *path, struct dirent *dirent, DIR *d
 			lstat(new_path ,&statbuf);
 
 			curr->state = (S_ISDIR(statbuf.st_mode) ? 1 : 0);
+
 			curr->path = new_path;
 			curr->name = ft_strdup(dirent->d_name);
       get_info(curr->info, statbuf);

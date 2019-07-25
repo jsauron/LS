@@ -35,15 +35,21 @@ int		print_info(struct stat statbuf)
 	return (1);
 }
 
-int		list_dir(struct dirent *dirent, DIR *dir, struct stat statbuf)
+int		list_dir(struct dirent *dirent, DIR *dir, struct stat statbuf, char *path)
 {
-	if (S_ISDIR(statbuf.st_mode) /*&& ft_strcmp(path, dirent->d_name) == 0*/)
-	{
+  char *new_path;
+
+  new_path = NULL;
 		while ((dirent = readdir(dir)) != NULL)
-			if ( (ft_strcmp(dirent->d_name, ".") != 0) && (ft_strcmp(dirent->d_name, "..") != 0))
-				printf("%s\n", dirent->d_name);
-	}
-	return (1);
+			if ( (ft_strcmp(dirent->d_name, ".") != 0)
+          && (ft_strcmp(dirent->d_name, "..") != 0) && *dirent->d_name != '.')
+      {
+        new_path = ft_addstr(path, ft_addstr("/", dirent->d_name));
+        lstat(new_path, &statbuf);
+        (S_ISDIR(statbuf.st_mode)) ? printf("\033[36m\033[1m%s\t \033[0m", dirent->d_name) : printf("%s\t", dirent->d_name);
+
+      }
+    return (1);
 }
 
 
@@ -52,23 +58,20 @@ void	parse(char *path)
 	DIR				*dir;
 	struct dirent	*dirent;
 	struct stat		statbuf;
-	//char			current_path[PATH_MAX];
-
-	//stocker le path du current file dans statbuf
-	//if ((getcwd(current_path, PATH_MAX) == NULL))
-	//		stop_exec(strerror(errno));
-	dirent = NULL;
+	
+  dirent = NULL;
+  dir = NULL;
 	if (lstat(path, &statbuf) == -1)
 		stop_exec(strerror(errno));
-	if (S_ISDIR(statbuf.st_mode) && ft_strcmp(path, dirent->d_name) == 0)
+	if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
 	{
 		if ((dir = opendir(path)) == NULL)
 			stop_exec(strerror(errno));
-		list_dir(dirent, dir, statbuf);
+		list_dir(dirent, dir, statbuf, path);
 		closedir(dir);
 	}
-	if (S_ISREG(statbuf.st_mode) && ft_strcmp(path, dirent->d_name) == 0)
-		print_info(statbuf);
+	if (S_ISREG(statbuf.st_mode))
+    printf("%s\n", path);
 }
 
 t_element		*listing_dir_all(char *path, t_element *curr)
@@ -107,7 +110,7 @@ int		main(int ac, char **av)
 	else if (ft_strcmp(av[1], "-R") == 0)
 	{
 	if (ac < 3)
-			listing_dir_all(".", init_list("."));
+			print_list_2(listing_dir_all(".", init_list(".")));
 		else if (ac == 3)
 			print_list_2(listing_dir_all(av[2], init_list(av[2])));
 	}
