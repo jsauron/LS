@@ -55,15 +55,6 @@ typedef struct		t_info
 	char			*time;
 }					t_info;
 
-typedef struct		t_file
-{
-	char			*name;
-	char			*path;
-	t_info			info;
-	struct t_file			*next;
-	struct t_file			*before;
-}					t_file;
-
 typedef struct		t_element
 {
 	int				state;
@@ -76,18 +67,27 @@ typedef struct		t_element
 	struct t_element			*next;
 }					t_element;
 
+//ft_ls.c
+int   get_info(t_info *f, struct stat statbuf);
+int   print_info(struct stat statbuf);
+int   list_dir(struct dirent *dirent, DIR *dir, struct stat statbuf);
+void  parse(char *path);
+t_element   *listing_dir_all(char *path, t_element *curr);
+int   main(int ac, char **av);
+
+//ft_ls_2.c
+t_element   *init_list(char *path);
+t_element     *read_all(t_element *curr, char *path, struct dirent *dirent, DIR *dir, struct stat statbuf);
+int     check_dir(t_element *head, t_element *curr);
+
+//utils.c
+void  stop_exec(char *msg);
+void  print_list_1(t_element *d);
+char  *path_dir(char *path);
+void  print_list_2(t_element *d);
+char  *ft_addstr(char *s1, char *s2);
+
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);
-int		print_list(t_element *d);
-int		add_dir(t_element	*curr, struct stat statb, struct dirent *dirent, char *path, DIR *dir);
-int		add_file();
-t_element	*create_list(char *path, struct dirent *dirent, DIR *dir, t_element *curr);
-int		get_info(t_info *f, struct stat statbuf);
-int		print_info(struct stat statbuf);
-int		fonction_r( t_element *curr, struct stat statb, struct dirent *dirent, DIR *dir, char *path);
-void  stop_exec(char *msg);
-t_element *read_all(t_element *curr, char *path , struct dirent *dirent, DIR *dir, struct stat statbuf);
-t_element *init_list(char *path);
-int		check_dir(t_element *head, t_element *curr);
-t_element		*listing_dir_all(char *path,  t_element *curr);
+
 #endif
