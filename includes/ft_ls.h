@@ -97,8 +97,10 @@ void  print_list_2(t_element *d);
 char  *ft_addstr(char *s1, char *s2);
 
 //sort.c
+int           sort_list(t_element *curr, int r);
 t_element     *sort_elem_by(t_element *curr, int(*sort)(t_element *, t_element *));
-int   name(t_element *curr, t_element *next);
+int   ascii(t_element *curr, t_element *next);
+
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);
 

@@ -20,6 +20,13 @@
 
   }
   */
+int           sort_list(t_element *curr, int r)
+{
+  if (!r)
+   sort_elem_by(curr, ascii); 
+  return (0);
+}
+
 t_element     *sort_elem_by(t_element *curr, int(*sort)(struct t_element *, struct t_element *))
 {
   t_element *head;
@@ -43,7 +50,7 @@ t_element     *sort_elem_by(t_element *curr, int(*sort)(struct t_element *, stru
   return (curr);
 }
 
-int   name(t_element *curr, t_element *next)
+int   ascii(t_element *curr, t_element *next)
 {
   int i;
 

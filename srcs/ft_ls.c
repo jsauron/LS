@@ -54,7 +54,7 @@ t_element		*listing_dir_all(char *path, t_element *curr, int r)
     }
   else
     printf("%s\n", path);
-  sort_elem_by(curr->head->next, name);
+  sort_list(curr->head->next, r);
 		return (curr->head);
 }
 
