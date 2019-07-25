@@ -75,7 +75,7 @@ int			check_dir(t_element *head, t_element *curr)
 		{
      // printf("\n%s:\n", elem->path);
 			elem->state = 0;
-			listing_dir_all(elem->path, curr);
+			listing_dir_all(elem->path, curr, 1);
     }
 		elem = elem->next;
 	}

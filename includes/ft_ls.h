@@ -72,7 +72,7 @@ int   get_info(t_info *f, struct stat statbuf);
 int   print_info(struct stat statbuf);
 int   list_dir(struct dirent *dirent, DIR *dir, struct stat stab, char *path);
 void  parse(char *path);
-t_element   *listing_dir_all(char *path, t_element *curr);
+t_element   *listing_dir_all(char *path, t_element *curr, int r);
 int   main(int ac, char **av);
 
 //ft_ls_2.c
@@ -87,6 +87,9 @@ char  *path_dir(char *path);
 void  print_list_2(t_element *d);
 char  *ft_addstr(char *s1, char *s2);
 
+//sort.c
+t_element     *sort_elem_by(t_element *curr, int(*sort)(t_element *, t_element *));
+int   name(t_element *curr, t_element *next);
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);
 

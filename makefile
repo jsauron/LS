@@ -17,6 +17,7 @@ SRCS_DIR = srcs/
 SRC = srcs/ft_ls.c \
 	  srcs/ft_ls_2.c \
 		srcs/utils.c	\
+		srcs/sort.c \
 	ft_strmode.c
 
 OBJS = $(SRC:.c=.o)

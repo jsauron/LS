@@ -35,7 +35,7 @@ int		print_info(struct stat statbuf)
 	return (1);
 }
 
-int		list_dir(struct dirent *dirent, DIR *dir, struct stat statbuf, char *path)
+/*int		list_dir(struct dirent *dirent, DIR *dir, struct stat statbuf, char *path)
 {
   char *new_path;
 
@@ -51,30 +51,8 @@ int		list_dir(struct dirent *dirent, DIR *dir, struct stat statbuf, char *path)
       }
     return (1);
 }
-
-
-void	parse(char *path)
-{
-	DIR				*dir;
-	struct dirent	*dirent;
-	struct stat		statbuf;
-	
-  dirent = NULL;
-  dir = NULL;
-	if (lstat(path, &statbuf) == -1)
-		stop_exec(strerror(errno));
-	if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
-	{
-		if ((dir = opendir(path)) == NULL)
-			stop_exec(strerror(errno));
-		list_dir(dirent, dir, statbuf, path);
-		closedir(dir);
-	}
-	if (S_ISREG(statbuf.st_mode))
-    printf("%s\n", path);
-}
-
-t_element		*listing_dir_all(char *path, t_element *curr)
+*/
+t_element		*listing_dir_all(char *path, t_element *curr, int r)
 {
 		DIR				*dir;
 		struct dirent	*dirent;
@@ -83,20 +61,17 @@ t_element		*listing_dir_all(char *path, t_element *curr)
 		dir = NULL;
 		dirent = NULL;
 
-		if (lstat(path, &statbuf) == -1)
-			stop_exec(strerror(errno));
+		(lstat(path, &statbuf) == -1) ? stop_exec(strerror(errno)) : 0;
 		if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
     {
-      if ((dir = opendir(path)) == NULL)
-				stop_exec(strerror(errno));
-
+      (dir = opendir(path)) ? 0 : stop_exec(strerror(errno));
 		  curr = read_all(curr, path, dirent, dir, statbuf);
-	  	closedir(dir);
-
-		check_dir(curr->head, curr);
+	  	closedir(dir); 
+		  r ? check_dir(curr->head, curr) : 0;
     }
   else
     printf("%s\n", path);
+  sort_elem_by(curr->head->next, name);
 		return (curr->head);
 }
 
@@ -106,16 +81,16 @@ int		main(int ac, char **av)
 	//char	arg[5]  = {'l', 'R', 'a', 'r', 't'};
 	//int (*flag[2])(char*, struct dirent *dirent, DIR *, struct stat*) = {list_dir, create_list};
 	if (ac == 1)
-		parse(".");
+		print_list_2(listing_dir_all(".", init_list("."), 0));
 	else if (ft_strcmp(av[1], "-R") == 0)
 	{
 	if (ac < 3)
-			print_list_2(listing_dir_all(".", init_list(".")));
+			print_list_2(listing_dir_all(".", init_list("."), 2));
 		else if (ac == 3)
-			print_list_2(listing_dir_all(av[2], init_list(av[2])));
+			print_list_2(listing_dir_all(av[2], init_list(av[2]), 1));
 	}
 	else if (ac > 1)
-		parse(av[1]);
+		print_list_2(listing_dir_all(av[1], init_list(av[2]), 0));
 
 	return (0);
 }
