@@ -1,15 +1,16 @@
 #include "../includes/ft_ls.h"
 
-/*t_tab       init_ptr_fct_sort()
-  {
-  ftab[0] = &name_alpha; //
+      init_ptr_fct_sort()
+{
+  ftab[0] = &name_ascii; //
   ftab[1] = &time; // -t
-  ftab[2] = &reverse_alpha; // -r
+  ftab[2] = &reverse_ascii; // -r
   ftab[3] = &size; // -S
   ftab[4] = &not_sorted; // -f
-  }
+  return (ftab);
+}
   
-  
+ /* 
   tab[1] = &get_info; // -l
   tab[2] = &show_hide; // -a
   tab[3] = &recursive; // -R
@@ -20,10 +21,15 @@
 
   }
   */
-int           sort_list(t_element *curr, int r)
+int           sort_list(t_flag *flag, t_element *curr)
 {
-  if (!r)
-   sort_elem_by(curr, ascii); 
+  if (!flag->r)
+   sort_elem_by(curr, ascii);
+  while (flag->sort)
+  {
+    sort_elem_by(curr, ftab(*flag->sort));
+    flag->sort++;
+   } 
   return (0);
 }
 
@@ -58,6 +64,18 @@ int   ascii(t_element *curr, t_element *next)
   while (curr->name[i] - next->name[i] == 0) 
     i++;
   if (curr->name[i] - next->name[i] > 0)
+    return (-1);
+  return (0);
+}
+
+int   reverse_ascii(t_element *curr, t_element *next)
+{
+  int i;
+
+  i = 0;
+   while (curr->name[i] - next->name[i] == 0) 
+    i++;
+  if (curr->name[i] - next->name[i] < 0)
     return (-1);
   return (0);
 }

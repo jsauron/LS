@@ -70,9 +70,9 @@ typedef struct		t_element
 typedef struct    t_flag
 {
   char    **file;
-  char    tab[7];
-  int     sort;
-  int     option;
+  char     *sort;
+  char     *option;
+  int       r;
 }               t_flag;
 
 
@@ -81,13 +81,13 @@ int   get_info(t_info *f, struct stat statbuf);
 int   print_info(struct stat statbuf);
 int   list_dir(struct dirent *dirent, DIR *dir, struct stat stab, char *path);
 int  parse(t_flag *flag, int ac, char **av);
-t_element   *listing_dir_all(char *path, t_element *curr, int r);
+t_element   *listing_dir_all(char *path, t_element *curr, t_flag *flag);
 int   main(int ac, char **av);
 
 //ft_ls_2.c
 t_element   *init_list(char *path);
 t_element     *read_all(t_element *curr, char *path, struct dirent *dirent, DIR *dir, struct stat statbuf);
-int     check_dir(t_element *head, t_element *curr);
+int     check_dir(t_element *head, t_element *curr, t_flag *flag);
 
 //utils.c
 void  stop_exec(char *msg);
@@ -97,9 +97,10 @@ void  print_list_2(t_element *d);
 char  *ft_addstr(char *s1, char *s2);
 
 //sort.c
-int           sort_list(t_element *curr, int r);
+int           sort_list(t_flag *flag, t_element *curr);
 t_element     *sort_elem_by(t_element *curr, int(*sort)(t_element *, t_element *));
 int   ascii(t_element *curr, t_element *next);
+int   reverse_ascii(t_element *curr, t_element *next);
 
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);

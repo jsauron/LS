@@ -1,35 +1,28 @@
 #include "../includes/ft_ls.h"
 
-int   init_flag(t_flag *flag)
-{
-    flag->sort = 0;
-    //  flag->tab[7] = {'r','t','S','f','l','R','a'};
-    return (1);
- }
-
 int   parse_flag(t_flag *flag, char *av)
 {
   int i;
   int j;
+  char *option;
+  char *sort;
 
   i = 1;
   j = 0;
+  option = flag->option;
+  sort = flag->sort;
   while (av[i])
   {
-    j = 0;
-    while (&flag->tab[j])
-    {
-      if (ft_strcmp(&flag->tab[j], &av[i]) != 0)
-      {
-        flag->sort *= (j < 4) ? 10 + j : 0;
-        flag->option *= (j >= 4) ? 10 + j : 0;
-      }
-      j++;
-    }
-    i++;
+    if (av[i] == 'r' || av[i] == 't' || av[i] == 'S' || av[i] == 'f')
+        *flag->sort++ = av[i]; // verifier les doublons 
+    if (av[i] == 'l' || av[i] == 'a')
+        *flag->option++ = av[i];
+    flag->r = (av[i] == 'R') ? 1 : 0;
   }
-  printf("sort = %d\n", flag->sort);
-  printf("option = %d\n", flag->option);
+  flag->option = ft_strdup(option);
+  flag->sort = ft_strdup(sort);
+  printf("sort = %s\n", flag->sort);
+  printf("option = %s\n", flag->option);
   return (1);
 }
 
@@ -45,8 +38,5 @@ int   parse(t_flag *flag, int ac, char **av)
       parse_flag(flag, av[i]);
     i++;
   }
-
-  //if (i < j)
-  //    //printf("ls: %s: No such file or directory", av[j]);
   return (1);
 }

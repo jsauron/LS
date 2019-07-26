@@ -64,7 +64,7 @@ t_element			*read_all(t_element *curr, char *path, struct dirent *dirent, DIR *d
 	return (curr);
 }
 
-int			check_dir(t_element *head, t_element *curr)
+int			check_dir(t_element *head, t_element *curr, t_flag *flag)
 {
   t_element *elem;
 
@@ -75,7 +75,7 @@ int			check_dir(t_element *head, t_element *curr)
 		{
      // printf("\n%s:\n", elem->path);
 			elem->state = 0;
-			listing_dir_all(elem->path, curr, 1);
+			listing_dir_all(elem->path, curr, flag);
     }
 		elem = elem->next;
 	}
