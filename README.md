@@ -1,2 +1,2 @@
 # LS
-Recoder la commande "ls".
+An implemnatations of the "ls" command.
