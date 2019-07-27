@@ -64,7 +64,7 @@ int		main(int ac, char **av)
 
   (!(flag = malloc(sizeof(t_flag)))) ? stop_exec("malloc t_flag failed") : 0;
 
-  //parse(flag, ac, av);
+  parse(flag, ac, av);
   if (ac == 1)
 		print_list_2(listing_dir_all(".", init_list("."), flag));
 	else if (ft_strcmp(av[1], "-R") == 0)

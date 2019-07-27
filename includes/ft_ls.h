@@ -67,12 +67,17 @@ typedef struct		t_element
 	struct t_element			*next;
 }					t_element;
 
+typedef int (*fcn)(struct t_element *,struct t_element *);
+
 typedef struct    t_flag
 {
   char    **file;
   char     *sort;
-  char     *option;
   int       r;
+  int       a;
+  int       l;
+  fcn      ftab[4];
+
 }               t_flag;
 
 
@@ -101,6 +106,11 @@ int           sort_list(t_flag *flag, t_element *curr);
 t_element     *sort_elem_by(t_element *curr, int(*sort)(t_element *, t_element *));
 int   ascii(t_element *curr, t_element *next);
 int   reverse_ascii(t_element *curr, t_element *next);
+int   size(t_element *curr, t_element *next);
+int   time_modif(t_element *curr, t_element *next);
+int   init_ptr_sort(fcn *ftab);
+
+//parsing.c
 
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);
