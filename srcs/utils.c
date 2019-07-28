@@ -6,19 +6,6 @@ void  stop_exec(char *msg)
   exit(0);
 }
 
-void  print_list_1(t_element *d)
-{
-  printf("\n");
-  d= d->next;
-  while (d != NULL)
-  {
-    printf("---%s\n", d->name);
-    //printf("---%zu\n", d->info->size);
-    //printf("---%s\n", d->info->mode);
-    d = d->next;
-  }
-}
-
 char  *path_dir(char *path)
 {
   char  *head;
@@ -40,6 +27,8 @@ void  print_list_2(t_element *d)
   d = d->next;
   while (d != NULL)
   {
+//	if (flag->r)
+//		sort_elem_by(d, ascii_path);
     if (d->info->type)
       printf("\033[36m\033[1m%s\t \033[0m", d->name);
     else

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/28 15:36:43 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/28 16:03:03 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,11 @@ char  *ft_addstr(char *s1, char *s2);
 //sort.c
 int           sort_list(t_flag *flag, t_element *curr);
 t_element     *sort_elem_by(t_element *curr, int(*sort)(t_element *, t_element *));
+t_element     *sort_name_by(t_element *curr, int(*sort)(t_element *, t_element *));
 int   ascii(t_element *curr, t_element *next);
 int   reverse_ascii(t_element *curr, t_element *next);
 int   size(t_element *curr, t_element *next);
+int   ascii_path(t_element *curr, t_element *next);
 int   time_modif(t_element *curr, t_element *next);
 int   init_ptr_sort(fcn *ftab);
 

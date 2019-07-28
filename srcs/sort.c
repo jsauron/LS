@@ -25,7 +25,7 @@ int           sort_list(t_flag *flag, t_element *curr)
 {
 	if (!flag->r)
 		sort_elem_by(curr, ascii);
-	while (*flag->sort)
+	while (flag->sort && *flag->sort )
 	{
 		sort_elem_by(curr, flag->ftab[(int)*flag->sort]);
 		flag->sort++;
@@ -71,6 +71,17 @@ t_element     *sort_elem_by(t_element *curr, int(*sort)(struct t_element *, stru
 	return (curr);
 }
 
+/*int   ascii_path(t_element *curr, t_element *next)
+{
+	int	i;
+	int	c;
+
+	i = 0;
+	c = 0;
+	while (curr->path[i]
+	return(ft_strcmp(curr->path, next->path));
+}
+*/
 int   ascii(t_element *curr, t_element *next)
 {
 	int i;

@@ -7,11 +7,6 @@ int   parse_flag(t_flag *flag, char *av)
 
   i = 0;
   //printf("av = %s\n", av);
-  while(i < 9)
-  {
-    flag->sort[i] = 'a';
-    i++;
-  }
   sort = flag->sort;
   i = 1;
   while (av[i] && ft_isprint(av[i]))
@@ -35,9 +30,6 @@ int   parse_flag(t_flag *flag, char *av)
   }
   *flag->sort = '\0';
   flag->sort = ft_strdup(sort);
-  //while (*flag->sort)
-	//printf("sort2 = %d\n", *flag->sort++);
-
   return (1);
 }
 
@@ -47,12 +39,9 @@ int		parse_file(t_flag *flag, char **av, int i)
 
 	j = 0;
 	while (av[i])
-	{
-//		printf("%s\n", av[i]);
 		if (av[i][0] != '-')
-			flag->file[j++] = ft_strdup(av[i]);
-		i++;
-	}
+			flag->file[j++] = ft_strdup(av[i++]);
+	flag->file[j] = NULL;
 	return (1);
 }
 
@@ -60,17 +49,14 @@ int   parse(t_flag *flag, int ac, char **av)
 {
   int i;
 
-  i = 0;
+  i = 1;
+  //init_ptr_sort(flag->ftab);
   flag->r = 0;
   flag->l = 0;
   flag->a = 0;
-  flag->file = malloc(sizeof(char *) * 3);
-  flag->sort = (ac == 1) ? ft_memalloc(1) : malloc(sizeof(char) * 10);
-  while (i < 3)
-	  flag->file[i++] = ft_memalloc(1);
-	i = 1;
-	//flag->ftab = malloc(sizeof(fcn) * 4);
-  //init_ptr_sort(flag->ftab);
+  flag->file = malloc(sizeof(char *) * 1);
+  flag->sort = (ac == 1) ? ft_memalloc(1) : malloc(sizeof(char) * 1);
+  
   flag->ftab[0] = &ascii;
   flag->ftab[1] = &time_modif; // -t
   flag->ftab[2] = &reverse_ascii; // -r
@@ -81,7 +67,10 @@ int   parse(t_flag *flag, int ac, char **av)
     if (av[i][0] == '-')
       parse_flag(flag, av[i]);
 	else
+	{
+		flag->sort = NULL;
 		return (parse_file(flag, av, i));
+	}
     i++;
   }
   return (0);
