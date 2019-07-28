@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/24 17:29:12 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/28 15:36:43 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ typedef struct		t_info
 	char			*user;
 	char			*gr_user;
 	size_t			size;
-	char			*time;
+	long			time;
+	char			*str_time;
 }					t_info;
 
 typedef struct		t_element

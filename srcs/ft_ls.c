@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/24 18:21:11 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/28 15:36:45 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		get_info(t_info *f, struct stat statbuf)
 		f->user = ft_strdup((getpwuid(statbuf.st_uid))->pw_name);
 		f->gr_user = (getgrgid(statbuf.st_gid))->gr_name;
 		f->size = statbuf.st_size;
-		f->time = ctime(&statbuf.st_mtime);
+		f->time = statbuf.st_mtimespec.tv_sec;
+		f->str_time = ctime(&statbuf.st_mtime);
 		f->type = (S_ISDIR(statbuf.st_mode)) ? 1 : 0;
 	return (1);
 }
@@ -60,24 +61,16 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 
 int		main(int ac, char **av)
 {
+ int i;
   t_flag    *flag;
 
+  i = 0;
   (!(flag = malloc(sizeof(t_flag)))) ? stop_exec("malloc t_flag failed") : 0;
 
   parse(flag, ac, av);
-  if (ac == 1)
-		print_list_2(listing_dir_all(".", init_list("."), flag));
-	else if (ft_strcmp(av[1], "-R") == 0)
-	{
-	if (ac < 3)
-			print_list_2(listing_dir_all(".", init_list("."), flag));
-		else if (ac == 3)
-			print_list_2(listing_dir_all(av[2], init_list(av[2]), flag));
-	}
-	else if (ac > 1)
-		print_list_2(listing_dir_all(av[1], init_list(av[2]), flag));
-
-  free(flag);
+  while (flag->file[i+1])
+	print_list_2(listing_dir_all(flag->file[i++], init_list(*flag->file), flag));
+	free(flag);
 	return (0);
 }
 
