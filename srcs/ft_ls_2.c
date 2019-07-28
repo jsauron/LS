@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 17:03:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/24 18:19:52 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/28 17:25:27 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_element		*init_list(char *path)
 	curr->name = path;
 	curr->path = path;
 	curr->next = NULL;
-	curr->stair = 0;
+	curr->info->stair = 0;
 	return (curr);
 }
 
@@ -48,35 +48,29 @@ t_element			*read_all(t_element *curr, char *path, struct dirent *dirent, DIR *d
 			new_path = ft_addstr(path, ft_addstr("/", dirent->d_name));
 			lstat(new_path ,&statbuf);
 
-			curr->state = (S_ISDIR(statbuf.st_mode) ? 1 : 0);
+			curr->info->state = (S_ISDIR(statbuf.st_mode) ? 1 : 0);
 
 			curr->path = new_path;
 			curr->name = ft_strdup(dirent->d_name);
-      get_info(curr->info, statbuf);
- /*    if (curr->state)
-			  printf("\033[36m \033[1m %s\t \033[0m", curr->name);
-      else
-			  printf("%s\t",curr->name);
-	*/		curr->stair = i;
+			get_info(curr->info, statbuf);
+			curr->info->stair = i;
 		}
 	}
- //   printf("\n");
 	return (curr);
 }
 
 int			check_dir(t_element *head, t_element *curr, t_flag *flag)
 {
-  t_element *elem;
+	t_element *elem;
 
-  elem = head;
+	elem = head;
 	while (elem != NULL)
 	{
-		if (elem->state == 1)
+		if (elem->info->state == 1)
 		{
-     // printf("\n%s:\n", elem->path);
-			elem->state = 0;
+			elem->info->state = 0;
 			listing_dir_all(elem->path, curr, flag);
-    }
+		}
 		elem = elem->next;
 	}
 	return (1);

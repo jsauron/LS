@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/24 17:29:12 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/28 17:15:58 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,15 @@ typedef struct		t_info
 	char			*user;
 	char			*gr_user;
 	size_t			size;
-	char			*time;
+	long			time;
+	char			*str_time;
+	int				state;
+	int				stair;
+	int				hide;
 }					t_info;
 
 typedef struct		t_element
 {
-	int				state;
-	int				stair;
-	int				hide;
 	char			*name;
 	char			*path;
 	t_info			*info;
@@ -67,12 +68,17 @@ typedef struct		t_element
 	struct t_element			*next;
 }					t_element;
 
+typedef int (*fcn)(struct t_element *,struct t_element *);
+
 typedef struct    t_flag
 {
   char    **file;
   char     *sort;
-  char     *option;
   int       r;
+  int       a;
+  int       l;
+  fcn      ftab[4];
+
 }               t_flag;
 
 
@@ -99,8 +105,15 @@ char  *ft_addstr(char *s1, char *s2);
 //sort.c
 int           sort_list(t_flag *flag, t_element *curr);
 t_element     *sort_elem_by(t_element *curr, int(*sort)(t_element *, t_element *));
+t_element     *sort_name_by(t_element *curr, int(*sort)(t_element *, t_element *));
 int   ascii(t_element *curr, t_element *next);
 int   reverse_ascii(t_element *curr, t_element *next);
+int   size(t_element *curr, t_element *next);
+int   ascii_path(t_element *curr, t_element *next);
+int   time_modif(t_element *curr, t_element *next);
+int   init_ptr_sort(fcn *ftab);
+
+//parsing.c
 
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);

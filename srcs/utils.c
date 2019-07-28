@@ -6,19 +6,6 @@ void  stop_exec(char *msg)
   exit(0);
 }
 
-void  print_list_1(t_element *d)
-{
-  printf("\n");
-  d= d->next;
-  while (d != NULL)
-  {
-    printf("---%s\n", d->name);
-    //printf("---%zu\n", d->info->size);
-    //printf("---%s\n", d->info->mode);
-    d = d->next;
-  }
-}
-
 char  *path_dir(char *path)
 {
   char  *head;
@@ -45,7 +32,7 @@ void  print_list_2(t_element *d)
     else
       printf("%s\t", d->name);
     if (d->next)
-      d->stair < d->next->stair ? printf("\n\n%s\n", path_dir(d->next->path)) : 0;
+      d->info->stair < d->next->info->stair ? printf("\n\n%s\n", path_dir(d->next->path)) : 0;
     d = d->next;
   }
   printf("\n");
