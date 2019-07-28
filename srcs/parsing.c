@@ -5,13 +5,10 @@ int   parse_flag(t_flag *flag, char *av)
   int i;
   char *sort;
 
-  i = 0;
-  //printf("av = %s\n", av);
-  sort = flag->sort;
   i = 1;
+  sort = flag->sort;
   while (av[i] && ft_isprint(av[i]))
   {
-    //printf("av[%d] = %c\n", i, (av[i]));
     if (av[i] == 'r')
       *flag->sort++ = 2; // verifier les doublons 
     else if (av[i] == 't')

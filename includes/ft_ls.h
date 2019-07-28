@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/28 16:03:03 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/28 17:15:58 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ typedef struct		t_info
 	size_t			size;
 	long			time;
 	char			*str_time;
+	int				state;
+	int				stair;
+	int				hide;
 }					t_info;
 
 typedef struct		t_element
 {
-	int				state;
-	int				stair;
-	int				hide;
 	char			*name;
 	char			*path;
 	t_info			*info;

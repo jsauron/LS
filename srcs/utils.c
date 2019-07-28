@@ -27,14 +27,12 @@ void  print_list_2(t_element *d)
   d = d->next;
   while (d != NULL)
   {
-//	if (flag->r)
-//		sort_elem_by(d, ascii_path);
     if (d->info->type)
       printf("\033[36m\033[1m%s\t \033[0m", d->name);
     else
       printf("%s\t", d->name);
     if (d->next)
-      d->stair < d->next->stair ? printf("\n\n%s\n", path_dir(d->next->path)) : 0;
+      d->info->stair < d->next->info->stair ? printf("\n\n%s\n", path_dir(d->next->path)) : 0;
     d = d->next;
   }
   printf("\n");
