@@ -108,7 +108,7 @@ int   reverse_ascii(t_element *curr, t_element *next)
 
 int   size(t_element *curr, t_element *next)
 {
-	if (curr->info->size < next->info->size)
+	if (curr->info->size > next->info->size)
 		return (-1);
 	return (0);
 } 
