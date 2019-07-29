@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/28 17:15:58 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/29 13:29:47 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int   size(t_element *curr, t_element *next);
 int   ascii_path(t_element *curr, t_element *next);
 int   time_modif(t_element *curr, t_element *next);
 int   init_ptr_sort(fcn *ftab);
-
+int		init_flag_struct(t_flag *flag);
 //parsing.c
 
 //ADD TO LIBFFT FUNCTION

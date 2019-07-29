@@ -32,7 +32,7 @@ void  print_list_2(t_element *d)
     else
       printf("%s\t", d->name);
     if (d->next)
-      d->info->stair < d->next->info->stair ? printf("\n\n%s\n", path_dir(d->next->path)) : 0;
+      d->info->stair < d->next->info->stair ? printf("\n\n%s:\n", path_dir(d->next->path)) : 0;
     d = d->next;
   }
   printf("\n");

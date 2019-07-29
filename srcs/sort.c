@@ -1,7 +1,19 @@
 #include "../includes/ft_ls.h"
 
-int   init_ptr_fct_sort(fcn *ftab)
+int		init_flag_struct(t_flag *flag)
 {
+	flag->r = 0;
+	flag->l = 0;
+	flag->a = 0;
+	flag->file = ft_memalloc(1);
+	flag->sort = ft_memalloc(1);
+	init_ptr_sort(flag->ftab);
+	return (1);
+}
+
+int   init_ptr_sort(fcn *ftab)
+{
+
 	ftab[0] = &ascii; 
 	ftab[1] = &time_modif; // -t
 	ftab[2] = &reverse_ascii; // -r
@@ -59,29 +71,29 @@ t_element     *sort_elem_by(t_element *curr, int(*sort)(struct t_element *, stru
 	head = curr;
 	while (curr && curr->next)
 	{
-			if ((*sort)(curr, curr->next) != 0)
-			{
-				swap_node(curr, curr->next);
-				curr = head;
-			}
-			else
-				curr = curr->next;
+		if ((*sort)(curr, curr->next) != 0)
+		{
+			swap_node(curr, curr->next);
+			curr = head;
+		}
+		else
+			curr = curr->next;
 	}
 	curr = head;
 	return (curr);
 }
 
 /*int   ascii_path(t_element *curr, t_element *next)
-{
-	int	i;
-	int	c;
+  {
+  int	i;
+  int	c;
 
-	i = 0;
-	c = 0;
-	while (curr->path[i]
-	return(ft_strcmp(curr->path, next->path));
-}
-*/
+  i = 0;
+  c = 0;
+  while (curr->path[i]
+  return(ft_strcmp(curr->path, next->path));
+  }
+  */
 int   ascii(t_element *curr, t_element *next)
 {
 	int i;
@@ -115,7 +127,7 @@ int   size(t_element *curr, t_element *next)
 
 int   time_modif(t_element *curr, t_element *next)
 {
-	if (curr->info->time < next->info->time)
+	if (curr->info->time > next->info->time)
 		return (-1);
 	return (0);
 }

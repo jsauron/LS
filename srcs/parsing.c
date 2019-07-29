@@ -27,7 +27,9 @@ int   parse_flag(t_flag *flag, char *av)
   }
   *flag->sort = '\0';
   flag->sort = ft_strdup(sort);
-  printf("flag->sort = %d\n", *flag->sort);
+  i = 0;
+  while (flag->sort[i])
+	printf("flag->sort = %d\n", flag->sort[i++]);
   return (1);
 }
 
@@ -47,17 +49,7 @@ int   parse(t_flag *flag, int ac, char **av)
   int i;
 
   i = 1;
-  //init_ptr_sort(flag->ftab);
-  flag->r = 0;
-  flag->l = 0;
-  flag->a = 0;
-  flag->file = malloc(sizeof(char *) * 1);
-  flag->sort = ft_memalloc(1);
-  
-  flag->ftab[0] = &ascii;
-  flag->ftab[1] = &time_modif; // -t
-  flag->ftab[2] = &reverse_ascii; // -r
-  flag->ftab[3] = &size; // -S
+  init_flag_struct(flag);
   *flag->file = ft_strdup(".");
   while (i < ac)
   {
