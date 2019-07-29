@@ -3,11 +3,11 @@
 int   parse_flag(t_flag *flag, char *av)
 {
 	int i;
-	
+
 	i = 1;
 	if (!(flag->sort = malloc(sizeof(fcn))))
 		return (0);
-	*flag->sort = NULL	;
+	*flag->sort = NULL;
 	while (av[i] && ft_isprint(av[i]))
 	{
 		if (av[i] == 'r')
@@ -24,9 +24,13 @@ int   parse_flag(t_flag *flag, char *av)
 			flag->l = 1;
 		else if (av[i] == 'a')
 			flag->a = 1;
+		else
+		{
+			flag_error(av[i]);
+			return (0);
+		}
 		i++;
 	}
-	
 	return (1);
 }
 
@@ -36,7 +40,11 @@ int		parse_file(t_flag *flag, char **av, int i)
 
 	j = 0;
 	while (av[i])
+	{
+		if (av[i][0] == '-' && av[i][1] == '-')
+			i++;
 		flag->file[j++] = ft_strdup(av[i++]);
+	}
 	flag->file[j] = NULL;
 	return (1);
 }
@@ -52,7 +60,7 @@ int   parse(t_flag *flag, int ac, char **av)
 		if (av[i][0] == '-' && av[i][1] && av[i][1] != '-')
 		{
 			if (!parse_flag(flag, av[i]))
-			return (0);
+				return (0);
 		}
 		else if ((av[i][0] != '-')
 				|| (av[i][0] == '-' && av[i][1] && av[i][1] == '-'))
