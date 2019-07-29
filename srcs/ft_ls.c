@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/28 17:04:33 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/29 13:46:28 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 	if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
 	{
 		(dir = opendir(path)) ? 0 : stop_exec(strerror(errno));
-		curr = read_all(curr, path, dirent, dir, statbuf);
+		curr = read_all(flag, curr, path, dirent, dir, statbuf);
 		closedir(dir); 
 		flag->r ? check_dir(curr->head, curr, flag) : 0;
 	}

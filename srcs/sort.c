@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/29 13:38:02 by jsauron           #+#    #+#             */
+/*   Updated: 2019/07/29 13:41:06 by jsauron          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_ls.h"
 
 int		init_flag_struct(t_flag *flag)
@@ -25,12 +37,6 @@ int   init_ptr_sort(fcn *ftab)
 /* 
    tab[1] = &get_info; // -l
    tab[2] = &show_hide; // -a
-   tab[3] = &recursive; // -R
-   tab[4] = &time; // -t
-   ftab[5] = &reverse_alpha; // -r
-   ftab[0] = &size; -S // 
-   bjv ftab[0] = &not_sorted; // -f
-
    }
    */
 int           sort_list(t_flag *flag, t_element *curr)

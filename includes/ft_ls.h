@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/29 13:29:47 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/29 13:44:20 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int   main(int ac, char **av);
 
 //ft_ls_2.c
 t_element   *init_list(char *path);
-t_element     *read_all(t_element *curr, char *path, struct dirent *dirent, DIR *dir, struct stat statbuf);
+t_element     *read_all(t_flag *flag, t_element *curr, char *path, struct dirent *dirent, DIR *dir, struct stat statbuf);
 int     check_dir(t_element *head, t_element *curr, t_flag *flag);
 
 //utils.c
