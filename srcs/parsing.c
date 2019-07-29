@@ -2,35 +2,32 @@
 
 int   parse_flag(t_flag *flag, char *av)
 {
-  int i;
-  char *sort;
-  
-  i = 1;
-  sort = flag->sort;
-  while (av[i] && ft_isprint(av[i]))
-  {
-    if (av[i] == 'r' && !ft_strchr(sort, 2))
-      *flag->sort++ = 2; 
-    else if (av[i] == 't' && !ft_strchr(sort, 1))
-      *flag->sort++ = 1;  
-    else if (av[i] == 'S' && !ft_strchr(sort, 3))
-      *flag->sort++ = 3;  
-    //else if (av[i] == 'f' && !ft_strchr(sort, 4))
-      //*flag->sort++ = 4;
-    else if  (av[i] == 'R')
-		  flag->r = 1;
-    else if (av[i] == 'l')
-		flag->l = 1;
-	else if (av[i] == 'a')
-		flag->a = 1;
-	i++;
-  }
-  *flag->sort = '\0';
-  flag->sort = ft_strdup(sort);
-  i = 0;
-  while (flag->sort[i])
-	printf("flag->sort = %d\n", flag->sort[i++]);
-  return (1);
+	int i;
+	
+	i = 1;
+	if (!(flag->sort = malloc(sizeof(fcn))))
+		return (0);
+	*flag->sort = NULL	;
+	while (av[i] && ft_isprint(av[i]))
+	{
+		if (av[i] == 'r')
+			*flag->sort = &reverse_ascii; 
+		else if (av[i] == 't')
+			*flag->sort =  &time_modif;
+		else if (av[i] == 'S')
+			*flag->sort = &size;
+		//else if (av[i] == 'f' && !ft_strchr(sort, 4))
+		//*flag->sort++ = 4;
+		else if  (av[i] == 'R')
+			flag->r = 1;
+		else if (av[i] == 'l')
+			flag->l = 1;
+		else if (av[i] == 'a')
+			flag->a = 1;
+		i++;
+	}
+	
+	return (1);
 }
 
 int		parse_file(t_flag *flag, char **av, int i)
@@ -39,29 +36,29 @@ int		parse_file(t_flag *flag, char **av, int i)
 
 	j = 0;
 	while (av[i])
-			flag->file[j++] = ft_strdup(av[i++]);
+		flag->file[j++] = ft_strdup(av[i++]);
 	flag->file[j] = NULL;
 	return (1);
 }
 
 int   parse(t_flag *flag, int ac, char **av)
 {
-  int i;
+	int i;
 
-  i = 1;
-  init_flag_struct(flag);
-  *flag->file = ft_strdup(".");
-  while (i < ac)
-  {
-		if (av[i][0] == '-' && av[i][1] && av[i][1] != '-')
-      parse_flag(flag, av[i]);
-	else if ((av[i][0] != '-')
-      || (av[i][0] == '-' && av[i][1] && av[i][1] == '-'))
+	i = 1;
+	init_flag_struct(flag);
+	while (i < ac)
 	{
-		flag->sort = NULL;
-		return (parse_file(flag, av, i));
+		if (av[i][0] == '-' && av[i][1] && av[i][1] != '-')
+		{
+			if (!parse_flag(flag, av[i]))
+			return (0);
+		}
+		else if ((av[i][0] != '-')
+				|| (av[i][0] == '-' && av[i][1] && av[i][1] == '-'))
+			return (parse_file(flag, av, i));
+		i++;
 	}
-    i++;
-  }
-  return (0);
+	*flag->file = ft_strdup(".");
+	return (1);
 }

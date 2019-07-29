@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:38:02 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/29 14:51:16 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/29 18:18:15 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,20 @@
 
 int		init_flag_struct(t_flag *flag)
 {
-	flag->r = 0;
-	flag->l = 0;
-	flag->a = 0;
-	flag->file = ft_memalloc(1);
-	flag->sort = ft_memalloc(1);
-	init_ptr_sort(flag->ftab);
+	ft_bzero(flag, sizeof(t_flag));
+	if (!(flag->file = malloc(sizeof(char *))))
+		return (0);
+	*flag->file = NULL;
 	return (1);
 }
 
-int   init_ptr_sort(fcn *ftab)
-{
-
-	ftab[0] = &ascii; 
-	ftab[1] = &time_modif; // -t
-	ftab[2] = &reverse_ascii; // -r
-	ftab[3] = &size; // -S
-	//  ftab[4] = &not_sorted; // -f
-	return (1);
-}
-
-/* 
-   tab[1] = &get_info; // -l
-   tab[2] = &show_hide; // -a
-   }
-   */
-int           sort_list(t_flag *flag, t_element *curr)
+int			sort_list(t_flag *flag, t_element *curr)
 {
 	if (!flag->r)
 		sort_elem_by(curr, ascii);
-	while (flag->sort && *flag->sort )
+	if (flag->sort && *flag->sort)
 	{
-		sort_elem_by(curr, flag->ftab[(int)*flag->sort]);
+		sort_elem_by(curr, *flag->sort);
 		flag->sort++;
 	} 
 	return (0);
@@ -126,14 +108,14 @@ int   reverse_ascii(t_element *curr, t_element *next)
 
 int   size(t_element *curr, t_element *next)
 {
-	if (curr->info->size > next->info->size)
+	if (curr->info->size < next->info->size)
 		return (-1);
 	return (0);
 } 
 
 int   time_modif(t_element *curr, t_element *next)
 {
-	if (curr->info->time > next->info->time)
+	if (curr->info->time < next->info->time)
 		return (-1);
 	return (0);
 }

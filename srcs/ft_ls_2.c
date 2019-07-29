@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 17:03:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/29 14:50:09 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/29 16:28:14 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_element		*init_list(char *path)
 
 	(curr = malloc(sizeof(t_element))) == NULL ? stop_exec("malloc curr failed") : 0;
 	(curr->info = malloc(sizeof(t_info))) == NULL ? stop_exec("malloc info failed") : 0;	
-
 	curr->head = curr;
 	curr->name = path;
 	curr->path = path;
@@ -52,11 +51,13 @@ t_element			*add_node(t_element *curr, char *path, struct dirent *dirent, struct
 	return (curr);
 }
 
-t_element			*read_all(t_flag *flag, t_element *curr, char *path, struct dirent *dirent, DIR *dir, struct stat statbuf)
+t_element			*read_all(t_flag *flag, t_element *curr, char *path,  DIR *dir, struct stat statbuf)
 {
+	struct	dirent *dirent;
 	int static i;
 
 	i++;
+	dirent = NULL;
 	while ((dirent = readdir(dir)) != NULL)
 	{
 		if (flag->a)

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/29 14:52:54 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/29 16:52:11 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 	if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
 	{
 		(dir = opendir(path)) ? 0 : stop_exec(strerror(errno));
-		curr = read_all(flag, curr, path, dirent, dir, statbuf);
+		curr = read_all(flag, curr, path, dir, statbuf);
 		closedir(dir); 
 		flag->r ? check_dir(curr->head, curr, flag) : 0;
 	}
@@ -61,14 +61,14 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 	return (curr->head);
 }
 
-int		main(int ac, char **av)
+int		main(const int ac, char *av[])
 {
 	int i;
 	t_flag    flag;
 
 	i = 0;
-	//(!(flag = malloc(sizeof(t_flag)))) ? stop_exec("malloc t_flag failed") : 0;
-	parse(&flag, ac, av);
+	if (!parse(&flag, ac, av))
+		return (0);
 	while (flag.file[i])
 		print_list(&flag, listing_dir_all(flag.file[i++], init_list(*flag.file), &flag));
 	return (0);
