@@ -22,16 +22,18 @@ char  *path_dir(char *path)
   return (ft_strdup(head));
 }
 
-void  print_list_2(t_element *d)
+void  print_list(t_flag *flag, t_element *d)
 {
   d = d->next;
   while (d != NULL)
   {
-    if (d->info->type)
+	if (flag->l)
+		print_info(d, d->info);
+    else if (d->info->type && !flag->l)
       printf("\033[36m\033[1m%s\t \033[0m", d->name);
-    else
+    else if (!d->info->type && !flag->l) 
       printf("%s\t", d->name);
-    if (d->next)
+    if (d->next && !flag->l)
       d->info->stair < d->next->info->stair ? printf("\n\n%s:\n", path_dir(d->next->path)) : 0;
     d = d->next;
   }

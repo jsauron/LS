@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/29 13:46:28 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/29 14:52:54 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		get_info(t_info *f, struct stat statbuf)
 {
-	//	f->mode = ft_strdup(ft_strmode(statbuf.st_mode));
+	f->mode = ft_strdup(ft_strmode(statbuf.st_mode));
 	f->nb_lien =  statbuf.st_nlink;
 	f->user = ft_strdup((getpwuid(statbuf.st_uid))->pw_name);
 	f->gr_user = (getgrgid(statbuf.st_gid))->gr_name;
@@ -25,14 +25,16 @@ int		get_info(t_info *f, struct stat statbuf)
 	return (1);
 }
 
-int		print_info(struct stat statbuf)
+int		print_info(t_element *curr, t_info *f)
 {
-	//printf("Mode: %s\n", ft_strmode(statbuf.st_mode));
-	printf("Nombre de liens: %hu\n", statbuf.st_nlink);
-	printf("Proprietaire: %s\n", (getpwuid(statbuf.st_uid))->pw_name);
-	printf("Groupe: %s\n", (getgrgid(statbuf.st_gid))->gr_name);
-	printf("Taille: %lld octets\n", statbuf.st_size);
-	printf("Date de derniere modification:: %s \n", ctime(&statbuf.st_mtime));
+	printf("Total %d \n", f->nb_lien);
+	printf("%s  ", f->mode);
+	printf("%d ", f->nb_lien);
+	printf("  %s  ", f->user);
+	printf(" %s ", f->gr_user);
+	printf(" %zu ", f->size);
+	printf(" %s ", f->str_time);
+	printf(" %s", curr->name);
 	return (1);
 }
 
@@ -62,15 +64,13 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 int		main(int ac, char **av)
 {
 	int i;
-	t_flag    *flag;
+	t_flag    flag;
 
 	i = 0;
-	(!(flag = malloc(sizeof(t_flag)))) ? stop_exec("malloc t_flag failed") : 0;
-
-	parse(flag, ac, av);
-	while (flag->file[i])
-		print_list_2(listing_dir_all(flag->file[i++], init_list(*flag->file), flag));
-	free(flag);
+	//(!(flag = malloc(sizeof(t_flag)))) ? stop_exec("malloc t_flag failed") : 0;
+	parse(&flag, ac, av);
+	while (flag.file[i])
+		print_list(&flag, listing_dir_all(flag.file[i++], init_list(*flag.file), &flag));
 	return (0);
 }
 

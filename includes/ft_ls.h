@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/29 13:44:20 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/07/29 14:48:12 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ typedef struct    t_flag
 
 //ft_ls.c
 int   get_info(t_info *f, struct stat statbuf);
-int   print_info(struct stat statbuf);
 int   list_dir(struct dirent *dirent, DIR *dir, struct stat stab, char *path);
 int  parse(t_flag *flag, int ac, char **av);
 t_element   *listing_dir_all(char *path, t_element *curr, t_flag *flag);
@@ -97,9 +96,9 @@ int     check_dir(t_element *head, t_element *curr, t_flag *flag);
 
 //utils.c
 void  stop_exec(char *msg);
-void  print_list_1(t_element *d);
 char  *path_dir(char *path);
-void  print_list_2(t_element *d);
+void  print_list(t_flag *flag, t_element *d);
+int  print_info(t_element *d, t_info *f);
 char  *ft_addstr(char *s1, char *s2);
 
 //sort.c
