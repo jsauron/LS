@@ -91,7 +91,7 @@ int   main(int ac, char **av);
 t_element   *init_list(char *path);
 t_element     *read_all(t_flag *flag, t_element *curr, char *path,  DIR *dir, struct stat statbuf);
 int     check_dir(t_element *head, t_element *curr, t_flag *flag);
-
+t_element *add_node(t_element *curr, char *path, char *name, struct stat statb, int i);
 //utils.c
 void  stop_exec(char *msg);
 char  *path_dir(char *path);

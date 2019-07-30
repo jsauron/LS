@@ -6,6 +6,20 @@ void  stop_exec(char *msg)
   exit(0);
 }
 
+void  free_list(t_element *d)
+{
+  t_element *tmp;
+
+  tmp = NULL;
+  while (d)
+  {
+    tmp = d->next;
+    free(d);
+    d = tmp;
+  }
+  free(d);
+}
+
 char  *path_dir(char *path)
 {
   char  *head;
@@ -27,17 +41,20 @@ void  print_list(t_flag *flag, t_element *d)
   d = d->next;
   while (d != NULL)
   {
-	if (flag->l)
-		print_info(d, d->info);
-    else if (d->info->type && !flag->l)
+  	if (flag->l)
+	  	print_info(d, d->info);
+    else if (d->info->type)
       printf("\033[36m\033[1m%s\t \033[0m", d->name);
-    else if (!d->info->type && !flag->l) 
+    else if (!d->info->type) 
       printf("%s\t", d->name);
     if (d->next && !flag->l)
+    {
       d->info->stair < d->next->info->stair ? printf("\n\n%s:\n", path_dir(d->next->path)) : 0;
+    }
     d = d->next;
   }
   printf("\n");
+  free_list(d);
 }
 
 char  *ft_addstr(char *s1, char *s2)

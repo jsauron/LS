@@ -41,14 +41,16 @@ int		print_info(t_element *curr, t_info *f)
 t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 {
 	DIR				*dir;
-	struct dirent	*dirent;
 	struct stat statbuf;
+  int       i;
 
 	dir = NULL;
-	dirent = NULL;
-
+  i = 0;
+  while (flag->file[i])
+  {
+    path = flag->file[i];
 	(lstat(path, &statbuf) == -1) ? stop_exec(strerror(errno)) : 0;
-	if (S_ISDIR(statbuf.st_mode)/* && ft_strcmp(path, dirent->d_name) == 0*/)
+	if (S_ISDIR(statbuf.st_mode))
 	{
 		(dir = opendir(path)) ? 0 : stop_exec(strerror(errno));
 		curr = read_all(flag, curr, path, dir, statbuf);
@@ -56,8 +58,10 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 		flag->r ? check_dir(curr->head, curr, flag) : 0;
 	}
 	else
-		printf("%s\n", path);
-	sort_list(flag, curr->head->next);
+    curr = add_node(curr, path, path, statbuf, 0);
+  i++;
+  } 
+	sort_list(flag, curr->head->next); // avant curr->head->next
 	return (curr->head);
 }
 
@@ -69,8 +73,7 @@ int		main(const int ac, char *av[])
 	i = 0;
 	if (!parse(&flag, ac, av))
 		return (0);
-	while (flag.file[i])
-		print_list(&flag, listing_dir_all(flag.file[i++], init_list(*flag.file), &flag));
+		print_list(&flag, listing_dir_all(flag.file[0], init_list(*flag.file), &flag));
 	return (0);
 }
 
