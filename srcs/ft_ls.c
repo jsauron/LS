@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/29 19:00:33 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/04 17:59:12 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
   }
   else
     curr = add_node(curr, path, path, statbuf, 0);
+//  sort_elem_by(curr, stair);
   return (curr);
 } 
 
@@ -62,8 +63,11 @@ t_element		*ls_file(t_flag *flag, t_element *list)
   int i;
   
   i = 0;
+
+  sort_file(flag->file);
   while (flag->file[i])
   {
+	  printf("flag->file[%d] = %s\n", i, flag->file[i]);
     list = listing_dir_all(flag->file[i], list, flag); 
   i++;
   }

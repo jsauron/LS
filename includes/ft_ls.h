@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/29 18:17:42 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/04 16:48:34 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int  print_info(t_element *d, t_info *f);
 char  *ft_addstr(char *s1, char *s2);
 
 //sort.c
+int   paths(t_element *curr, t_element *next);
 int   stair(t_element *curr, t_element *next);
 int           sort_list(t_flag *flag, t_element *curr);
 t_element     *sort_elem_by(t_element *curr, int(*sort)(t_element *, t_element *));
@@ -112,6 +113,7 @@ int   ascii_path(t_element *curr, t_element *next);
 int   time_modif(t_element *curr, t_element *next);
 int   init_ptr_sort(fcn *ftab);
 int		init_flag_struct(t_flag *flag);
+int		sort_file(char **file);
 //parsing.c
 
 //ADD TO LIBFFT FUNCTION

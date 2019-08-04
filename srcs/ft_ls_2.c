@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 17:03:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/29 16:28:14 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/04 17:57:54 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,19 @@ t_element			*add_node(t_element *curr, char *path, char *name, struct stat statb
 	curr = curr->next;
 
 	ft_bzero(curr->info, sizeof(t_info));
+//	new_path = (ft_strcmp(path, name) != 0) ? ft_addstr(path, ft_addstr("/", name)):  ft_strdup(path);
 	new_path = ft_addstr(path, ft_addstr("/", name));
 	lstat(new_path ,&statbuf);
 
 	curr->info->state = (S_ISDIR(statbuf.st_mode) ? 1 : 0);
 
+//	printf("path = %s\n", new_path);
+//	printf("name = %s\n", name);
 	curr->path = new_path;
 	curr->name = ft_strdup(name);
 	get_info(curr->info, statbuf);
 	curr->info->stair = i;
+//	printf("stair = %d\n", curr->info->stair);
 	return (curr);
 }
 

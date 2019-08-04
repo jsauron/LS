@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:38:02 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/29 18:18:15 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/04 17:20:20 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,36 @@ int			sort_list(t_flag *flag, t_element *curr)
   return (0);
 }
 
+int		sort_file(char **file)
+{
+	int i;
+	char	*tmp;
+
+	tmp = NULL;
+	i= 0;
+	while (file[i + 1])
+	{
+		if (ft_strcmp(file[i], file[i + 1]) > 0)
+		{
+			tmp = file[i];
+			file[i] = file[i + 1];
+			file[i + 1] = tmp;
+			i = 0;
+		}
+		else 
+		i++;
+	}
+	
+	return (0);
+}
+
+int		paths(t_element *curr, t_element *next)
+{
+	if (ft_strcmp(curr->path, next->path) > 0)
+		return (-1);
+	return (0);
+
+}
 void	swap_node(t_element *a, t_element *b)
 {	
   char *tmp;
