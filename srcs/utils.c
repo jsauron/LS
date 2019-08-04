@@ -39,6 +39,8 @@ char  *path_dir(char *path)
 void  print_list(t_flag *flag, t_element *d)
 {
   d = d->next;
+  //if (flag->l)
+    //printf("Total = %d\n", d->info->total);
   while (d != NULL)
   {
   	if (flag->l)
@@ -49,7 +51,8 @@ void  print_list(t_flag *flag, t_element *d)
       printf("%s\t", d->name);
     if (d->next && !flag->l)
     {
-      d->info->stair < d->next->info->stair ? printf("\n\n%s:\n", path_dir(d->next->path)) : 0;
+      if (d->info->stair < d->next->info->stair)
+        printf("\n\n%s:\n", path_dir(d->next->path));
     }
     d = d->next;
   }

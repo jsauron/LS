@@ -56,15 +56,13 @@ t_element			*read_all(t_flag *flag, t_element *curr, char *path,  DIR *dir, stru
 	struct	dirent *dirent;
 	int static i;
 
-	//i += (curr->info->stair == 0) ? 2 : 1 ;
   i++;
 	dirent = NULL;
 	while ((dirent = readdir(dir)) != NULL)
 	{
 		if (flag->a)
 			curr = add_node(curr, path, dirent->d_name, statbuf, i);
-		else
-			if ((ft_strcmp(dirent->d_name, ".") != 0)
+		else if ((ft_strcmp(dirent->d_name, ".") != 0)
           && (ft_strcmp(dirent->d_name, "..") != 0)
           && *dirent->d_name != '.')
         curr = add_node(curr, path, dirent->d_name, statbuf, i);
@@ -79,7 +77,7 @@ int			check_dir(t_element *head, t_element *curr, t_flag *flag)
 	elem = head;
 	while (elem != NULL)
 	{
-		if (elem->info->state == 1)
+    if (elem->info->state == 1  && ft_strcmp(elem->name, "..") != 0 && ft_strcmp(elem->name, ".") != 0)
 		{
 			elem->info->state = 0;
 			listing_dir_all(elem->path, curr, flag);

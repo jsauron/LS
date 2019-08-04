@@ -57,6 +57,7 @@ typedef struct		t_info
 	int				state;
 	int				stair;
 	int				hide;
+  int       total;
 }					t_info;
 
 typedef struct		t_element
@@ -100,6 +101,7 @@ int  print_info(t_element *d, t_info *f);
 char  *ft_addstr(char *s1, char *s2);
 
 //sort.c
+int   stair(t_element *curr, t_element *next);
 int           sort_list(t_flag *flag, t_element *curr);
 t_element     *sort_elem_by(t_element *curr, int(*sort)(t_element *, t_element *));
 t_element     *sort_name_by(t_element *curr, int(*sort)(t_element *, t_element *));
