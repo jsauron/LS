@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/04 16:48:34 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/04 18:15:42 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char  *path_dir(char *path);
 void  print_list(t_flag *flag, t_element *d);
 int  print_info(t_element *d, t_info *f);
 char  *ft_addstr(char *s1, char *s2);
-
+void	free_list(t_element *d);
 //sort.c
 int   paths(t_element *curr, t_element *next);
 int   stair(t_element *curr, t_element *next);

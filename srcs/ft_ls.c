@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/04 17:59:12 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/04 18:43:35 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,36 +54,36 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
   }
   else
     curr = add_node(curr, path, path, statbuf, 0);
-//  sort_elem_by(curr, stair);
   return (curr);
 } 
 
-t_element		*ls_file(t_flag *flag, t_element *list)
+t_element		*ls_file(t_flag *flag)
 {
   int i;
+  t_element *list;
   
   i = 0;
-
+ list = NULL;
   sort_file(flag->file);
   while (flag->file[i])
   {
-	  printf("flag->file[%d] = %s\n", i, flag->file[i]);
-    list = listing_dir_all(flag->file[i], list, flag); 
+	list = init_list(*flag->file);
+    list = listing_dir_all(flag->file[i], list, flag);
+	sort_list(flag, list->head->next);
+    print_list(flag, list->head);
+	//free_list(list);
   i++;
   }
-  sort_list(flag, list->head->next);
   return (list->head);
 }
 
 int		main(const int ac, char *av[])
 {
   t_flag    flag;
-  t_element *list;
 
   if (!parse(&flag, ac, av))
     return (0);
-  list = init_list(*flag.file);
-    print_list(&flag, ls_file(&flag, list));
+  ls_file(&flag);
   return (0);
 }
 

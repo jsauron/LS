@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:38:02 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/04 17:20:20 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/04 18:43:09 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int			sort_list(t_flag *flag, t_element *curr)
     sort_elem_by(curr, ascii);
   if (flag->sort && *flag->sort)
     sort_elem_by(curr, *flag->sort);
-
   return (0);
 }
 
