@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 19:23:45 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/05 20:12:04 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct		t_info
 	int				state;
 	int				stair;
 	int				hide;
-  int       total;
+	int				total;
 }					t_info;
 
 typedef struct		t_element
@@ -102,20 +102,18 @@ int  print_info(t_element *d, t_info *f);
 char  *ft_addstr(char *s1, char *s2);
 void	free_list(t_element *d);
 //sort.c
-int   paths(t_element *curr, t_element *next);
-int   stair(t_element *curr, t_element *next);
 int           sort_list(t_flag *flag, t_element *curr);
+int           sort_file(t_flag *flag);
 t_element     *sort_elem_by(t_element *curr, int(*sort)(t_element *, t_element *));
-t_element     *sort_name_by(t_element *curr, int(*sort)(t_element *, t_element *));
 int   ascii(t_element *curr, t_element *next);
 int   reverse_ascii(t_element *curr, t_element *next);
 int   size(t_element *curr, t_element *next);
-int   ascii_path(t_element *curr, t_element *next);
 int   time_modif(t_element *curr, t_element *next);
-int   init_ptr_sort(fcn *ftab);
-int		init_flag_struct(t_flag *flag);
-int		sort_file(char **file);
 //parsing.c
+
+//init.c
+int		init_flag_struct(t_flag *flag);
+
 
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);

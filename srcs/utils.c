@@ -39,22 +39,16 @@ char  *path_dir(char *path)
 void  print_list(t_flag *flag, t_element *d)
 {
   d = d->next;
-  //if (flag->l)
-    //printf("Total = %d\n", d->info->total);
+  if (flag->l)
+    printf("Total = %d\n", d->info->total);
   while (d != NULL)
   {
   	if (flag->l)
 	  	print_info(d, d->info);
-    else if (d->info->type)
+     else if (d->info->type && !flag->l)
       printf("\033[36m\033[1m%s\t \033[0m", d->name);
-    else if (!d->info->type) 
+    else if (!d->info->type && !flag->l)
 	  printf("%s\t", d->name);
-  //  printf("%d\n", d->info->stair);
-  //  if (d->next && !flag->l)
-   // {
- //     if (d->info->stair < d->next->info->stair)
-//        printf("\n\n%s:\n", path_dir(d->next->path));
-  //  }
     d = d->next;
   }
   printf("\n");

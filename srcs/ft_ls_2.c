@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 17:03:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 19:22:04 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/05 21:04:10 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_element			*add_node(t_element *curr, char *path, char *name, struct stat statb
 {
 	t_element	*new;
 	char *new_path;
-
+	
 	(new = malloc(sizeof(t_element))) == NULL ? stop_exec("malloc new failed") : 0;
 	(new->info = malloc(sizeof(t_info))) == NULL ? stop_exec("malloc info failed") : 0;
 	curr->next = new;
@@ -44,13 +44,10 @@ t_element			*add_node(t_element *curr, char *path, char *name, struct stat statb
 
 	curr->info->state = (S_ISDIR(statbuf.st_mode) ? 1 : 0);
 
-	//	printf("path = %s\n", new_path);
-	//	printf("name = %s\n", name);
 	curr->path = new_path;
 	curr->name = ft_strdup(name);
 	get_info(curr->info, statbuf);
 	curr->info->stair = i;
-	//	printf("stair = %d\n", curr->info->stair);
 	return (curr);
 }
 

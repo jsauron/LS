@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 19:26:53 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/05 21:04:12 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int		get_info(t_info *f, struct stat statbuf)
 
 int		print_info(t_element *curr, t_info *f)
 {
-	printf("%s  ", f->mode);
+	printf("%s ", f->mode);
 	printf("%d ", f->nb_lien);
-	printf("  %s  ", f->user);
-	printf(" %s ", f->gr_user);
-	printf(" %zu ", f->size);
-	printf(" %s ", f->str_time);
-	printf(" %s", curr->name);
+	printf("%s ", f->user);
+	printf("%s ", f->gr_user);
+	printf("%zu ", f->size);
+	printf("%s ", f->str_time);
+	printf("%s ", curr->name);
 	return (1);
 }
 
@@ -44,13 +44,18 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 	struct stat statbuf;
 
 	dir = NULL;
-	(lstat(path, &statbuf) == -1) ? stop_exec(strerror(errno)) : 0;
+	if (lstat(path, &statbuf) == -1)
+	{
+		printf("ls: %s: %s\n", path,  (strerror(errno)));
+		return (curr);
+	}
 	if (S_ISDIR(statbuf.st_mode))
 	{
-		(dir = opendir(path)) ? 0 : stop_exec(strerror(errno));
+		(dir = opendir(path)) ? 0 : printf("ls: %s: %s\n", path,  (strerror(errno)));
 		curr = read_all(flag, curr, path, dir, statbuf);
 		sort_list(flag, curr->head->next);
-		(flag->ac != 1 && ft_strcmp(path, ".") != 0) ? printf("\n%s : \n", path) : 0;
+		if (flag->ac > 2 && ft_strcmp(path, ".") != 0)
+			printf("\n%s: \n", path);
 		print_list(flag, curr->head);
 		(flag->r) ? check_dir(curr->head, curr, flag) : 0;
 		closedir(dir);
@@ -86,8 +91,7 @@ int		main(const int ac, char *av[])
 
 	if (!parse(&flag, ac, av))
 		return (0);
-	flag.ac = ac;
-	sort_file(flag.file);
+	sort_file(&flag);
 	ls_file(&flag);
 	return (0);
 }

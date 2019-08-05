@@ -55,6 +55,7 @@ int   parse(t_flag *flag, int ac, char **av)
 
 	i = 1;
 	init_flag_struct(flag);
+	flag->ac = ac;
 	while (i < ac)
 	{
 		if (av[i][0] == '-' && av[i][1] && av[i][1] != '-')

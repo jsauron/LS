@@ -6,24 +6,14 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:38:02 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 19:05:26 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/05 20:04:04 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-int		init_flag_struct(t_flag *flag)
-{
-	ft_bzero(flag, sizeof(t_flag));
-	if (!(flag->file = malloc(sizeof(char *))))
-		return (0);
-	*flag->file = NULL;
-	return (1);
-}
-
 int			sort_list(t_flag *flag, t_element *curr)
 {
-	//  curr = sort_elem_by(curr, stair);
 	if (!flag->r)
 		sort_elem_by(curr, ascii);
 	if (flag->sort && *flag->sort)
@@ -31,13 +21,15 @@ int			sort_list(t_flag *flag, t_element *curr)
 	return (0);
 }
 
-int		sort_file(char **file)
+int		sort_file(t_flag *flag)
 {
 	int i;
 	char	*tmp;
+	char	**file;
 
+	file = flag->file;
 	tmp = NULL;
-	i= 0;
+	i = 0;
 	while (file[i + 1])
 	{
 		if (ft_strcmp(file[i], file[i + 1]) > 0)
@@ -53,13 +45,6 @@ int		sort_file(char **file)
 	return (0);
 }
 
-int		paths(t_element *curr, t_element *next)
-{
-	if (ft_strcmp(curr->path, next->path) > 0)
-		return (-1);
-	return (0);
-
-}
 void	swap_node(t_element *a, t_element *b)
 {	
 	char *tmp;
@@ -96,13 +81,6 @@ t_element     *sort_elem_by(t_element *curr, int(*sort)(struct t_element *, stru
 	}
 	curr = head;
 	return (curr);
-}
-
-int   stair(t_element *curr, t_element *next)
-{
-	if (curr->info->stair < next->info->stair)
-		return (-1);
-	return(0);
 }
 
 int   ascii(t_element *curr, t_element *next)

@@ -6,7 +6,7 @@
 #    By: jsauron <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/01 18:30:18 by jsauron           #+#    #+#              #
-#    Updated: 2019/07/29 16:42:07 by jsauron          ###   ########.fr        #
+#    Updated: 2019/08/05 19:46:49 by jsauron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC = srcs/ft_ls.c \
 		srcs/sort.c \
 		srcs/parsing.c \
 		srcs/error.c \
+		srcs/init.c	\
 	ft_strmode.c
 
 OBJS = $(SRC:.c=.o)
