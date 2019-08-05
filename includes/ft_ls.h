@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 18:50:35 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/05 19:23:45 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct    t_flag
   int       r;
   int       a;
   int       l;
+  int		ac;
 }               t_flag;
 
 int		flag_error(char c);
