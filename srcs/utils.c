@@ -48,16 +48,16 @@ void  print_list(t_flag *flag, t_element *d)
     else if (d->info->type)
       printf("\033[36m\033[1m%s\t \033[0m", d->name);
     else if (!d->info->type) 
-      printf("%s\t", d->name);
-    if (d->next && !flag->l)
-    {
-      if (d->info->stair < d->next->info->stair)
-        printf("\n\n%s:\n", path_dir(d->next->path));
-    }
+	  printf("%s\t", d->name);
+  //  printf("%d\n", d->info->stair);
+  //  if (d->next && !flag->l)
+   // {
+ //     if (d->info->stair < d->next->info->stair)
+//        printf("\n\n%s:\n", path_dir(d->next->path));
+  //  }
     d = d->next;
   }
   printf("\n");
-  free_list(d);
 }
 
 char  *ft_addstr(char *s1, char *s2)
@@ -78,7 +78,7 @@ char  *ft_addstr(char *s1, char *s2)
     res[i] = s1[i];
     i++;
   }
-  while ( s2 && s2[j])
+  while (s2 && s2[j])
     res[i++] = s2[j++];
   res[i] = '\0';
   return (res);
