@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 21:04:12 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/05 22:06:51 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 	dir = NULL;
 	if (lstat(path, &statbuf) == -1)
 	{
-		printf("ls: %s: %s\n", path,  (strerror(errno)));
+	//	add_to_buff(flag->buf, ft_strjoin("ls:", path)  %s: %s\n", path,  (strerror(errno)));
 		return (curr);
 	}
 	if (S_ISDIR(statbuf.st_mode))
@@ -55,7 +55,8 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 		curr = read_all(flag, curr, path, dir, statbuf);
 		sort_list(flag, curr->head->next);
 		if (flag->ac > 2 && ft_strcmp(path, ".") != 0)
-			printf("\n%s: \n", path);
+			add_to_buff(flag->buf, ft_strjoin(ft_strjoin("\n", path), ":\n"));
+			//	printf("\n%s: \n", path);
 		print_list(flag, curr->head);
 		(flag->r) ? check_dir(curr->head, curr, flag) : 0;
 		closedir(dir);
@@ -93,6 +94,7 @@ int		main(const int ac, char *av[])
 		return (0);
 	sort_file(&flag);
 	ls_file(&flag);
+	ft_putstr((char const *)flag.buf);
 	return (0);
 }
 

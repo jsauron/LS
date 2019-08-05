@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 20:12:04 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/05 22:06:53 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct    t_flag
   int       a;
   int       l;
   int		ac;
+  char		*buf;
+  char		buf2;
 }               t_flag;
 
 int		flag_error(char c);
@@ -118,4 +120,5 @@ int		init_flag_struct(t_flag *flag);
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);
 
+int		add_to_buff(char *dest, char *src);
 #endif
