@@ -60,7 +60,7 @@ char	*make_str(char *s1, char *s2, char *s3, char *s4)
 	str = ft_strjoinfree(ft_strjoin(s1, s2), ft_strjoin(s3, s4), 3);
 	return (str);
 }*/
-/*
+
 int		get_len_max(t_element *d)
 {
 	int len_max;
@@ -68,26 +68,32 @@ int		get_len_max(t_element *d)
 	len_max = 0;
 	while (d->next != NULL)
 	{
-		if (ft_strlen(d->name) > len_max)
+		if ((int)ft_strlen(d->name) > len_max)
 			len_max = ft_strlen(d->name);
 		d = d->next;
 	}
 	return (len_max);
 }
-*/
-/*int		column(t_flag *flag, t_element *d)
-{
-	int len_max;
-	int len_s;;
-	
-	len = get_len_max;
-	len_s = get_sizewindow;
 
+int		column(t_flag *flag, t_element *d)
+{
+	struct    winsize ws;
+
+	flag->len_max = get_len_max(d) + 1;
+	flag->len_s = ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+	return (0);
 }
-*/
+
 void  print_list(t_flag *flag, t_element *d)
 {
-//	column(flag, d);
+	int		nb_name;
+	char	*mini_buf;
+	int		nb_name;
+
+	column(flag, d);
+	if (!(mini_buf = malloc(sizeof(char) * flag->len_s)))
+		stop_exec("malloc minibuf failed\n");
+	nb_name = flag->len_s / flag->len_max;
 	d = d->next;
 	if (flag->l)
 		printf("Total = %d\n", d->info->total);

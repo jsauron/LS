@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/06 15:43:08 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/06 20:19:34 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #include <uuid/uuid.h>
 #include <string.h>
 #include <grp.h>
+#include <sys/ioctl.h>
 
 /*
  * ** Color text
@@ -70,7 +71,6 @@ typedef struct		t_element
 }					t_element;
 
 typedef int (*fcn)(struct t_element *,struct t_element *);
-
 typedef struct    t_flag
 {
   char    **file;
@@ -79,8 +79,9 @@ typedef struct    t_flag
   int       a;
   int       l;
   int		ac;
+  int		len_s;
+  int		len_max;
   char		buf[4096];
-  char		buf2[4096];
 }               t_flag;
 
 int		flag_error(char c);

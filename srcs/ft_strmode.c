@@ -6,11 +6,11 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:58:35 by jsauron           #+#    #+#             */
-/*   Updated: 2019/07/23 14:57:31 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/06 20:23:52 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_ls.h"
+#include "../includes/ft_ls.h"
 
 char	*ft_strmode(mode_t mode)
 {
