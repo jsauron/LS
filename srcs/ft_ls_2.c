@@ -6,25 +6,11 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 17:03:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 21:04:10 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/06 17:38:50 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
-
-t_element		*init_list(char *path)
-{
-	t_element	*curr;
-
-	(curr = malloc(sizeof(t_element))) == NULL ? stop_exec("malloc curr failed") : 0;
-	(curr->info = malloc(sizeof(t_info))) == NULL ? stop_exec("malloc info failed") : 0;	
-	ft_bzero(curr->info, sizeof(t_info));
-	curr->head = curr;
-	curr->name = path;
-	curr->path = path;
-	curr->next = NULL;
-	return (curr);
-}
 
 t_element			*add_node(t_element *curr, char *path, char *name, struct stat statbuf, int i)
 {

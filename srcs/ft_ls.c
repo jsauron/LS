@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 22:06:51 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/06 18:02:21 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,25 @@ int		get_info(t_info *f, struct stat statbuf)
 	f->mode = ft_strdup(ft_strmode(statbuf.st_mode));
 	f->nb_lien =  statbuf.st_nlink;
 	f->user = ft_strdup((getpwuid(statbuf.st_uid))->pw_name);
-	f->gr_user = (getgrgid(statbuf.st_gid))->gr_name;
+	f->gr_user = ft_strdup((getgrgid(statbuf.st_gid))->gr_name);
 	f->size = statbuf.st_size;
 	f->time = statbuf.st_mtimespec.tv_sec;
-	f->str_time = ctime(&statbuf.st_mtime);
+	f->str_time = ft_strdup(ctime(&statbuf.st_mtime));
 	f->type = (S_ISDIR(statbuf.st_mode)) ? 1 : 0;
 	return (1);
 }
 
-int		print_info(t_element *curr, t_info *f)
+int		print_info(t_flag *flag,t_element *curr, t_info *f)
 {
-	printf("%s ", f->mode);
-	printf("%d ", f->nb_lien);
-	printf("%s ", f->user);
-	printf("%s ", f->gr_user);
-	printf("%zu ", f->size);
-	printf("%s ", f->str_time);
-	printf("%s ", curr->name);
+	add_to_buff(flag->buf, f->mode);
+	add_to_buff(flag->buf, ft_itoa((int)f->nb_lien));
+	add_to_buff(flag->buf, f->user);
+	add_to_buff(flag->buf, f->gr_user);
+	add_to_buff(flag->buf, ft_itoa((int)f->size));
+	add_to_buff(flag->buf, f->str_time);
+	add_to_buff(flag->buf, curr->name);
 	return (1);
 }
-
 
 t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 {
@@ -54,9 +53,12 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 		(dir = opendir(path)) ? 0 : printf("ls: %s: %s\n", path,  (strerror(errno)));
 		curr = read_all(flag, curr, path, dir, statbuf);
 		sort_list(flag, curr->head->next);
-		if (flag->ac > 2 && ft_strcmp(path, ".") != 0)
-			add_to_buff(flag->buf, ft_strjoin(ft_strjoin("\n", path), ":\n"));
-			//	printf("\n%s: \n", path);
+		if ((flag->ac > 2 || flag->r) && ft_strcmp(path, ".") != 0)
+		{
+			add_to_buff(flag->buf, "\n");
+			add_to_buff(flag->buf, path);
+			add_to_buff(flag->buf, ":\n");
+		}
 		print_list(flag, curr->head);
 		(flag->r) ? check_dir(curr->head, curr, flag) : 0;
 		closedir(dir);
@@ -95,6 +97,8 @@ int		main(const int ac, char *av[])
 	sort_file(&flag);
 	ls_file(&flag);
 	ft_putstr((char const *)flag.buf);
+	free(flag.file);
+	free(flag.sort);
 	return (0);
 }
 

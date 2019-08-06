@@ -6,7 +6,7 @@
 #    By: jsauron <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/01 18:30:18 by jsauron           #+#    #+#              #
-#    Updated: 2019/08/05 19:46:49 by jsauron          ###   ########.fr        #
+#    Updated: 2019/08/06 18:40:05 by jsauron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = srcs/ft_ls.c \
 		srcs/parsing.c \
 		srcs/error.c \
 		srcs/init.c	\
-	ft_strmode.c
+	srcs/ft_strmode.c
 
 OBJS = $(SRC:.c=.o)
 
@@ -32,7 +32,7 @@ DONE = "\033[35m LS READY \033[0m"
 all: lib $(NAME)
 
 $(NAME):$(OBJS)
-	@gcc -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJS) -I $(INCLUDES) -g -fsanitize=address
+	@gcc -Wall -Wextra -Werror -o $(NAME) libft/libft.a $(OBJS) -I $(INCLUDES)  -g -fsanitize=address
 	@echo $(DONE)
 
 lib:

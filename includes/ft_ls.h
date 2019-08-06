@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 22:06:53 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/06 15:43:08 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ typedef struct    t_flag
   int       a;
   int       l;
   int		ac;
-  char		*buf;
-  char		buf2;
+  char		buf[4096];
+  char		buf2[4096];
 }               t_flag;
 
 int		flag_error(char c);
@@ -100,7 +100,7 @@ t_element *add_node(t_element *curr, char *path, char *name, struct stat statb, 
 void  stop_exec(char *msg);
 char  *path_dir(char *path);
 void  print_list(t_flag *flag, t_element *d);
-int  print_info(t_element *d, t_info *f);
+int  print_info(t_flag *flag,t_element *d, t_info *f);
 char  *ft_addstr(char *s1, char *s2);
 void	free_list(t_element *d);
 //sort.c
