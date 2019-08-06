@@ -1,2 +1,2 @@
 # LS
-My own implemnatation of the "ls" command.
+My own implementation of the "ls" command.
