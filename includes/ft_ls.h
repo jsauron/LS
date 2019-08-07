@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/06 20:19:34 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/07 16:07:32 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,12 @@ typedef struct    t_flag
   int       a;
   int       l;
   int		ac;
-  int		len_s;
+  int		len_win;
   int		len_max;
+  int		nb_by_lign;
   char		buf[4096];
+  char		*mini_buf;
+  int		*tab;
 }               t_flag;
 
 int		flag_error(char c);
@@ -100,7 +103,6 @@ t_element *add_node(t_element *curr, char *path, char *name, struct stat statb, 
 //utils.c
 void  stop_exec(char *msg);
 char  *path_dir(char *path);
-void  print_list(t_flag *flag, t_element *d);
 int  print_info(t_flag *flag,t_element *d, t_info *f);
 char  *ft_addstr(char *s1, char *s2);
 void	free_list(t_element *d);
@@ -116,10 +118,13 @@ int   time_modif(t_element *curr, t_element *next);
 
 //init.c
 int		init_flag_struct(t_flag *flag);
-
+ //display.c
+void  print_list(t_flag *flag, t_element *d);
 
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);
-
-int		add_to_buff(char *dest, char *src);
+int		add_to_buff(t_flag *flag, char *src);
+int		set_len_display(t_flag *flag, t_element *d);
+int		get_len_max(t_element *d);
+int		init_display(t_flag *flag, t_element *d);
 #endif

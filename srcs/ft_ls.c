@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/06 18:02:21 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/07 15:03:46 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int		get_info(t_info *f, struct stat statbuf)
 
 int		print_info(t_flag *flag,t_element *curr, t_info *f)
 {
-	add_to_buff(flag->buf, f->mode);
-	add_to_buff(flag->buf, ft_itoa((int)f->nb_lien));
-	add_to_buff(flag->buf, f->user);
-	add_to_buff(flag->buf, f->gr_user);
-	add_to_buff(flag->buf, ft_itoa((int)f->size));
-	add_to_buff(flag->buf, f->str_time);
-	add_to_buff(flag->buf, curr->name);
+	add_to_buff(flag, f->mode);
+	add_to_buff(flag, ft_itoa((int)f->nb_lien));
+	add_to_buff(flag, f->user);
+	add_to_buff(flag, f->gr_user);
+	add_to_buff(flag, ft_itoa((int)f->size));
+	add_to_buff(flag, f->str_time);
+	add_to_buff(flag, curr->name);
 	return (1);
 }
 
@@ -55,9 +55,9 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 		sort_list(flag, curr->head->next);
 		if ((flag->ac > 2 || flag->r) && ft_strcmp(path, ".") != 0)
 		{
-			add_to_buff(flag->buf, "\n");
-			add_to_buff(flag->buf, path);
-			add_to_buff(flag->buf, ":\n");
+			add_to_buff(flag, "\n");
+			add_to_buff(flag, path);
+			add_to_buff(flag, ":\n");
 		}
 		print_list(flag, curr->head);
 		(flag->r) ? check_dir(curr->head, curr, flag) : 0;
