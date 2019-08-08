@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 17:03:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/06 17:38:50 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/08 16:04:35 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_element			*add_node(t_element *curr, char *path, char *name, struct stat statb
 {
 	t_element	*new;
 	char *new_path;
-	
+
 	(new = malloc(sizeof(t_element))) == NULL ? stop_exec("malloc new failed") : 0;
 	(new->info = malloc(sizeof(t_info))) == NULL ? stop_exec("malloc info failed") : 0;
 	curr->next = new;

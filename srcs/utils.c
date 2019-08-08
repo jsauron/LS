@@ -1,14 +1,24 @@
 #include "../includes/ft_ls.h"
 
+int	len_list(t_element *d)
+{
+	int len;
+
+	len = 0;
+	while (d != NULL)
+	{
+		len++;
+		d = d->next;
+	}
+	return (len);
+}
+
 void  free_list(t_element *d)
 {
-	t_element *tmp;
 
-	tmp = NULL;
 	while (d)
 	{
-		tmp = d->next;
-/*		free(d->path);
+		free(d->path);
 		free(d->name);
 		free(d->head);
 		free(d->info->mode);
@@ -16,8 +26,6 @@ void  free_list(t_element *d)
 		free(d->info->user);
 		free(d->info->gr_user);
 		free(d->info);
-*/		free(d);
-		d = tmp;
 	}
 	free(d);
 }
@@ -45,8 +53,10 @@ int		get_len_max(t_element *d)
 	len_max = 0;
 	while (d->next != NULL)
 	{
+		printf("len libft %d\n" , (int)ft_strlen(d->name));
+		printf("name =  %s\n" , d->name);
 		if ((int)ft_strlen(d->name) > len_max)
-			len_max = ft_strlen(d->name);
+		len_max = ft_strlen(d->name);
 		d = d->next;
 	}
 	return (len_max);

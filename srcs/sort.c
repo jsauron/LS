@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:38:02 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/05 20:04:04 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/08 15:37:09 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,44 @@ int   ascii(t_element *curr, t_element *next)
 		i++;
 	if (curr->name[i] - next->name[i] > 0)
 		return (-1);
+	return (0);
+}
+
+t_element	*whos_next(t_element *d, int i)
+{
+	t_element *tmp;
+	int j;
+
+	j = 0;
+	tmp = d;
+	while (j < i && tmp != NULL)
+	{
+		printf("j = %d\n", j);
+		tmp = tmp->next;
+		j++;
+	}
+	printf("node swap 1= %s\n", d->name);
+	printf("node swap 2= %s\n", tmp->name);
+	return (tmp);
+}
+
+int		sort_column_list(t_flag *flag, t_element *d)
+{
+	int			i;
+	t_element	*tmp;
+
+	tmp = d;
+	i = 0;
+	while (d != NULL)
+	{
+		printf("%d\n", flag->nb_lign);
+		if (i % flag->nb_lign == 0)
+		{
+			tmp = whos_next(d, i + flag->nb_col -1);
+			swap_node(d, tmp);
+		}
+		d = d->next;
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/07 16:07:32 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/08 19:01:17 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct		t_info
 
 typedef struct		t_element
 {
+	int				i;
 	char			*name;
 	char			*path;
 	t_info			*info;
@@ -81,7 +82,9 @@ typedef struct    t_flag
   int		ac;
   int		len_win;
   int		len_max;
-  int		nb_by_lign;
+int			len_list;
+int			nb_lign;
+  int		nb_col;
   char		buf[4096];
   char		*mini_buf;
   int		*tab;
@@ -123,8 +126,11 @@ void  print_list(t_flag *flag, t_element *d);
 
 //ADD TO LIBFFT FUNCTION
 char	*ft_strmode(mode_t mode);
-int		add_to_buff(t_flag *flag, char *src);
+int		add_to_buff(t_flag *flag, char *s);
 int		set_len_display(t_flag *flag, t_element *d);
 int		get_len_max(t_element *d);
 int		init_display(t_flag *flag, t_element *d);
+char	*fill_wth_space(char *str, int len);
+int		len_list(t_element *d);
+int		sort_column_list(t_flag *flag, t_element *d);
 #endif

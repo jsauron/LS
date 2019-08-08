@@ -6,7 +6,7 @@
 #    By: jsauron <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/01 18:30:18 by jsauron           #+#    #+#              #
-#    Updated: 2019/08/07 14:07:37 by jsauron          ###   ########.fr        #
+#    Updated: 2019/08/08 18:00:47 by jsauron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ lib:
 	@make -j -C libft/ libft.a
 
 %.o: %.c $(INCLUDES)ft_ls.h
-	@gcc -Wall -Wextra -Werror -o $@ -c $<
+	@gcc -Wall -Wextra -Werror -g -o $@ -c $<
 
 clean:
 	@rm -f $(OBJS) && make -C libft/ clean

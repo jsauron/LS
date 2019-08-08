@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/07 15:03:46 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/08 19:43:17 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_element		*ls_file(t_flag *flag)
 	{
 		list = init_list(*flag->file);
 		list = listing_dir_all(flag->file[i], list, flag);
-		free_list(list);
+		//free_list(list);
 		i++;
 	}
 	return (list->head);
@@ -97,8 +97,8 @@ int		main(const int ac, char *av[])
 	sort_file(&flag);
 	ls_file(&flag);
 	ft_putstr((char const *)flag.buf);
-	free(flag.file);
-	free(flag.sort);
+	//free(flag.file);
+	//free(flag.sort);
 	return (0);
 }
 
