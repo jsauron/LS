@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/08 19:43:17 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/08 22:22:52 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 	dir = NULL;
 	if (lstat(path, &statbuf) == -1)
 	{
-	//	add_to_buff(flag->buf, ft_strjoin("ls:", path)  %s: %s\n", path,  (strerror(errno)));
+		printf("ls: %s: %s\n", path,  (strerror(errno)));
 		return (curr);
 	}
 	if (S_ISDIR(statbuf.st_mode))
@@ -97,8 +97,8 @@ int		main(const int ac, char *av[])
 	sort_file(&flag);
 	ls_file(&flag);
 	ft_putstr((char const *)flag.buf);
-	//free(flag.file);
-	//free(flag.sort);
+	free(flag.file);
+	free(flag.sort);
 	return (0);
 }
 

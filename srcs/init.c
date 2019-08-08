@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 19:40:24 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/08 19:56:06 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/08 22:22:54 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,20 @@ char		*fill_wth_space(char *str, int len)
 	i = 0;
 	if (!str)
 		return (NULL);
-//	printf("ici\n");
-	printf("len = %d\n", len );
-
 	while (i < len && str && str[i])
-	{
 		str[i++] = ' ';
-	}
-//	printf("ici2\n");
 	return (str);
 }
 
 int		init_flag_struct(t_flag *flag)
 {
-	//struct  winsize ws;
+	struct  winsize ws;
 	ft_bzero(flag,  sizeof(t_flag));
-	if (!(flag->file = malloc(sizeof(char *))))
-		return (-1);
+	//if (!(flag->file = malloc(sizeof(char *))))
+	//	return (-1);
 	*flag->file = NULL;
-	//ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-	flag->len_win = 90/*ws.ws_col*/;
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+	flag->len_win = ws.ws_col;
 	return (0);
 }
 
@@ -74,7 +68,6 @@ int		init_display(t_flag *flag, t_element *d)
 {
 	int		i;
 
-	printf("init\n");
 	i = 0;
 	flag->len_max = get_len_max(d) + 1;
 	if (flag->len_max > flag->len_win)
@@ -84,11 +77,6 @@ int		init_display(t_flag *flag, t_element *d)
 	if (!(flag->mini_buf = malloc(sizeof(char)* flag->len_win)))
 		stop_exec("malloc minibuf failed\n");
 	flag->len_list = len_list(d);
-	printf("==%d\n", flag->nb_col);
-	if ((int)(flag->nb_col) == 0)
-	{
-		printf("on a un zero\n");
-	}
 	flag->nb_lign = flag->len_list / flag->nb_col;
 	flag->nb_col =  (flag->len_list < flag->nb_col) ? flag->len_list : flag->nb_col;
 	init_display_tab(flag);

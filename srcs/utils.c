@@ -53,8 +53,6 @@ int		get_len_max(t_element *d)
 	len_max = 0;
 	while (d->next != NULL)
 	{
-		printf("len libft %d\n" , (int)ft_strlen(d->name));
-		printf("name =  %s\n" , d->name);
 		if ((int)ft_strlen(d->name) > len_max)
 		len_max = ft_strlen(d->name);
 		d = d->next;
