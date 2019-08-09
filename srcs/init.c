@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 19:40:24 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/08 22:22:54 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/09 12:05:38 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ char		*fill_wth_space(char *str, int len)
 int		init_flag_struct(t_flag *flag)
 {
 	struct  winsize ws;
+	
 	ft_bzero(flag,  sizeof(t_flag));
-	//if (!(flag->file = malloc(sizeof(char *))))
-	//	return (-1);
-	*flag->file = NULL;
 	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
 	flag->len_win = ws.ws_col;
 	return (0);
@@ -73,7 +71,7 @@ int		init_display(t_flag *flag, t_element *d)
 	if (flag->len_max > flag->len_win)
 		flag->nb_col = 1;
 	else
-		flag->nb_col = flag->len_win / flag->len_max;
+		flag->nb_col = flag->len_win / flag->len_max + 1;
 	if (!(flag->mini_buf = malloc(sizeof(char)* flag->len_win)))
 		stop_exec("malloc minibuf failed\n");
 	flag->len_list = len_list(d);

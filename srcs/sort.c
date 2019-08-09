@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 13:38:02 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/08 15:37:09 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/09 11:22:40 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		sort_file(t_flag *flag)
 	i = 0;
 	while (file[i + 1])
 	{
-		if (ft_strcmp(file[i], file[i + 1]) > 0)
+		if (file[i] && file[i + 1] && ft_strcmp(file[i], file[i + 1]) > 0)
 		{
 			tmp = file[i];
 			file[i] = file[i + 1];

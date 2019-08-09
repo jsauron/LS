@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 17:03:59 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/08 16:04:35 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/09 12:49:02 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int			check_dir(t_element *head, t_element *curr, t_flag *flag)
 	{
 		if (elem->info->state == 1  && ft_strcmp(elem->name, "..") != 0 && ft_strcmp(elem->name, ".") != 0)
 		{
+//			printf("name = %s\n", elem->name);
+//			printf("state = %d\n", elem->info->state);
 			elem->info->state = 0;
 			listing_dir_all(elem->path, curr, flag);;
 		}

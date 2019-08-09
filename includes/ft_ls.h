@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 18:42:46 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/08 19:01:17 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/09 12:39:49 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct    t_flag
   int       a;
   int       l;
   int		ac;
+  int		nb_file;
   int		len_win;
   int		len_max;
 int			len_list;

@@ -37,7 +37,9 @@ int   parse_flag(t_flag *flag, char *av)
 int		parse_file(t_flag *flag, char **av, int ac, int i)
 {
 	int j;
+	int	k;
 
+	k = i;
 	j = 0;
 	if (!(flag->file = malloc(sizeof(char *) * ac - i )))
 		return (-1);
@@ -47,7 +49,8 @@ int		parse_file(t_flag *flag, char **av, int ac, int i)
 			i++;
 		flag->file[j++] = ft_strdup(av[i++]);
 	}
-	flag->file[j] = NULL;
+	flag->nb_file = i - k ;
+ 	flag->file[j] = NULL;
 	return (1);
 }
 
@@ -70,7 +73,8 @@ int   parse(t_flag *flag, int ac, char **av)
 			return (parse_file(flag, av, ac, i));
 		i++;
 	}
+	if (!(flag->file = malloc(sizeof(char *))))
+		return (-1);
 	*flag->file = ft_strdup(".");
-	*flag->file++ = NULL;
 	return (1);
 }

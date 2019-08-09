@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 13:57:08 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/08 21:26:42 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/09 11:57:07 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int		add_to_buff(t_flag *flag,  char *s)
 {
-	if ((int)ft_strlen(flag->buf) > 4000)
+	if ((int)ft_strlen(flag->buf) + (int)ft_strlen(s) >= 4094)
+	{
+		ft_putstr((char const *)flag->buf);
 		ft_bzero(&flag->buf, 4096);
+	}
 	ft_strcat(flag->buf, (const char *)s);
 	return (0);
 }
@@ -61,11 +64,17 @@ void  print_list(t_flag *flag, t_element *d)
 			i = add_to_lign(flag, d->name, i);
 			//	add_to_buff(flag, "\033[0m");
 		}
+		else if (!d->info->type && !flag->l && d->info->stair == 0)
+		{
+			add_to_buff(flag, d->name);
+			add_to_buff(flag, "  ");
+		}
 		else if (!d->info->type && !flag->l)
 			i = add_to_lign(flag,  d->name, i);
 		d = d->next;
 		i++;
 	}
-	add_to_buff(flag, flag->mini_buf);
-	add_to_buff(flag, "\n");
+	if (flag->mini_buf[0] != ' ')
+		add_to_buff(flag, flag->mini_buf);
+//	add_to_buff(flag, "\n");
 }

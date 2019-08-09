@@ -6,7 +6,7 @@
 /*   By: jsauron <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:11:23 by jsauron           #+#    #+#             */
-/*   Updated: 2019/08/08 22:22:52 by jsauron          ###   ########.fr       */
+/*   Updated: 2019/08/09 12:53:18 by jsauron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ t_element		*listing_dir_all(char *path, t_element *curr, t_flag *flag)
 		(dir = opendir(path)) ? 0 : printf("ls: %s: %s\n", path,  (strerror(errno)));
 		curr = read_all(flag, curr, path, dir, statbuf);
 		sort_list(flag, curr->head->next);
-		if ((flag->ac > 2 || flag->r) && ft_strcmp(path, ".") != 0)
+		if ((flag->ac > 2 || flag->r) && ft_strcmp(path, ".") != 0
+				&& (flag->nb_file != 1 || ft_strchr(path, '/')))
 		{
-			add_to_buff(flag, "\n");
+			add_to_buff(flag, "\n\n");
 			add_to_buff(flag, path);
 			add_to_buff(flag, ":\n");
 		}
